@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="common/header :: head"></th:block>
+<head>
+    <meta charset="UTF-8">
+    <title>爱眼课堂</title>
+</head>
+<body>
+<form th:action="@{/query}" method="post"  >
+    <div>
+        <!--/*@thymesVar id="error" type=""*/-->
+        <span id="basic-addon0">&nbsp;</span>
+        <span style="font-size: 12px;color: red" th:text="${error}" aria-describedby="basic-addon0"></span>
+        <br/>
+    </div>
+    <div>
+        <span id="basic-addon1">学校名称</span>
+        <input id="school_name" name="schoolName" type="text" placeholder="学校名称" aria-describedby="basic-addon1"/>
+
+    </div>
+    <br/>
+    <div>
+        <span id="basic-addon2">学号</span>
+        <input id="studentNo" name="studentNo" type="text" placeholder="学号" aria-describedby="basic-addon2"/>
+    </div>
+    <br/>
+    <div>
+        <span id="basic-addon3">出生日期</span>
+        <input id="birethday" name="birethday" type="text" placeholder="20080129"/>
+    </div>
+    <br/>
+    <div>
+        <span id="basic-addon2">姓名</span>
+        <input id="name" name="name" type="text" placeholder="姓名" aria-describedby="basic-addon2"/>
+    </div>
+    <br/>
+    <button type="submit" style="width:190px;">开始查询</button>
+    <p>注：正确输入【姓名】+【前三项任意一项】即可</p>
+</form>
+</body>
+</html>

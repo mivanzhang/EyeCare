@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head lang="zh">
+    <meta charset="UTF-8" />
+    <title></title>
+</head>
+<body>
+<h1 th:text="${host}">Hello World</h1>
+<p>Today is: <span th:text="${today}">13 february 2011</span>.</p>
+
+<!-- Will produce 'http://localhost:8080/gtvg/order/details?orderId=3' (plus rewriting) -->
+<a href="details.html"
+   th:href="@{http://localhost:8080/gtvg/order/details(orderId=111)}">view</a>
+
+<p>current is: <span th:text="${#dates.format(#dates.createNow(), 'dd/MMM/yyyy HH:mm')}">13 february 2011</span>.</p>
+</body>
+</html>
