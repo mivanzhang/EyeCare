@@ -1,18 +1,36 @@
 package com.aiyan.product.bean;
 
-import java.util.List;
 
+import javax.persistence.*;
+
+@Entity
 public class School {
-    private String schoolId;
+    @Id
+    @GeneratedValue
+    private int schoolId;
+    @Column(nullable = false)
     private String schoolName;
-    private List<String> managerList;
+    @Column(nullable = false)
+    private String managerName;
+    private String managerPhoneNumber;
     private String authrize;
+    private String idCardPath;
 
-    public String getSchoolId() {
+    public String getIdCardPath() {
+        return idCardPath;
+    }
+
+    public void setIdCardPath(String idCardPath) {
+        this.idCardPath = idCardPath;
+    }
+
+    private int status;
+
+    public int getSchoolId() {
         return schoolId;
     }
 
-    public void setSchoolId(String schoolId) {
+    public void setSchoolId(int schoolId) {
         this.schoolId = schoolId;
     }
 
@@ -24,11 +42,35 @@ public class School {
         this.schoolName = schoolName;
     }
 
-    public List<String> getManagerList() {
-        return managerList;
+    public String getManagerName() {
+        return managerName;
     }
 
-    public void setManagerList(List<String> managerList) {
-        this.managerList = managerList;
+    public void setManagerName(String managerName) {
+        this.managerName = managerName;
+    }
+
+    public String getManagerPhoneNumber() {
+        return managerPhoneNumber;
+    }
+
+    public void setManagerPhoneNumber(String managerPhoneNumber) {
+        this.managerPhoneNumber = managerPhoneNumber;
+    }
+
+    public String getAuthrize() {
+        return authrize;
+    }
+
+    public void setAuthrize(String authrize) {
+        this.authrize = authrize;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }
