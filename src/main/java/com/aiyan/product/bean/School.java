@@ -2,8 +2,10 @@ package com.aiyan.product.bean;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Table
 public class School {
     @Id
     @GeneratedValue
@@ -12,12 +14,22 @@ public class School {
     private String schoolName;
     @Column(nullable = false)
     private String managerName;
+    @Column(nullable = false)
     private String managerPhoneNumber;
     private String authrize;
     private String idCardPath;
-
+    @OneToMany(mappedBy = "school")
+    private List<Student> studentList;
     public String getIdCardPath() {
         return idCardPath;
+    }
+
+    public List<Student> getStudentList() {
+        return studentList;
+    }
+
+    public void setStudentList(List<Student> studentList) {
+        this.studentList = studentList;
     }
 
     public void setIdCardPath(String idCardPath) {

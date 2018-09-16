@@ -1,22 +1,43 @@
 package com.aiyan.product.bean;
 
-import javax.persistence.Entity;
+import com.aiyan.product.common.Constants;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Table
 public class User {
-    private String userId;
+    @Id
+    @GeneratedValue
+    private int userId;
     private String userName;
+    @Column(nullable = false)
     private String phoneNumber;
     private String weiXinId;
-    private String birthDay;
+    //校方的管理人员
     private String schoolId;
-    //校色
 
-    public String getBirthDay() {
-        return birthDay;
+    @ManyToMany
+    @JoinTable(name = "user_watcher_list", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "student_id"))
+    private List<Student> studentIdList;
+
+    private int role = Constants.USER_ROLE_COMMON_USER;
+
+    public List<Student> getStudentIdList() {
+        return studentIdList;
     }
 
-    public void setBirthDay(String birthDay) {
-        this.birthDay = birthDay;
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public void setStudentIdList(List<Student> studentIdList) {
+        this.studentIdList = studentIdList;
     }
 
     public String getSchoolId() {
@@ -25,16 +46,6 @@ public class User {
 
     public void setSchoolId(String schoolId) {
         this.schoolId = schoolId;
-    }
-
-    private int role;
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public String getUserName() {
@@ -68,4 +79,5 @@ public class User {
     public void setRole(int role) {
         this.role = role;
     }
+
 }

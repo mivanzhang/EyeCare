@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Date;
 
 @Controller
-public class HelloController {
+public class HomePageController {
 
     @RequestMapping("/hello")
     public String index() {
