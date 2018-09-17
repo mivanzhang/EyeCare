@@ -48,12 +48,22 @@ public class SchoolController {
     @RequestMapping("school_register")
     public String schoolRegister(ModelMap map) {
         // 加入一个属性，用来在模板中读取
+        map.addAttribute("sendSMS", "获取验证码");
         // return模板文件的名称，对应src/main/resources/templates/index.html
         return "school/school_register_step1";
     }
 
     @RequestMapping("/saveschool")
-    public String saveSchool(ModelMap map, School school) {
+    public String saveSchool(ModelMap map, School school, @RequestParam String action) {
+
+        if ("".equals(action) || action.length() < 1) {
+            //发送验证码
+            map.addAttribute("schoolName", school.getSchoolName());
+            map.addAttribute("managerPhoneNumber", school.getManagerPhoneNumber());
+            map.addAttribute("sendSMS", "已发送");
+            map.addAttribute("managerName", school.getManagerName());
+            return "school/school_register_step1";
+        }
         // 加入一个属性，用来在模板中读取
         // return模板文件的名称，对应src/main/resources/templates/index.html
         school.setStatus(Constants.SCHOOL_STATUS_STEP1);
@@ -74,7 +84,15 @@ public class SchoolController {
     }
 
     @RequestMapping("/finishInputSchool")
-    public String finishInputSchool(ModelMap map, School school) {
+    public String finishInputSchool(ModelMap map, School school, @RequestParam String action) {
+        if ("".equals(action) || action.length() < 1) {
+            //发送验证码
+            map.addAttribute("schoolName", school.getSchoolName());
+            map.addAttribute("managerPhoneNumber", school.getManagerPhoneNumber());
+            map.addAttribute("sendSMS", "已发送");
+            map.addAttribute("managerName", school.getManagerName());
+            return "school/school_register_step2";
+        }
         // 加入一个属性，用来在模板中读取
         // return模板文件的名称，对应src/main/resources/templates/index.html
         school.setStatus(Constants.SCHOOL_STATUS_JUDGING);

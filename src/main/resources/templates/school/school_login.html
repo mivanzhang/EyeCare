@@ -6,29 +6,37 @@
     <meta charset="UTF-8">
     <title>注册爱眼课堂</title>
 </head>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+
 <body>
 <form th:action="@{/try_school_login}" method="post">
     <div>
         <span id="basic-addon1">全称学校名</span>
         <input id="schoolName" name="schoolName" th:value="${schoolName}" type="text" placeholder="学校名全称(必填)"
-               aria-describedby="basic-addon2"/>
+               aria-describedby="basic-addon2" required/>
     </div>
     <br/>
     <div>
         <span id="basic-addon3">手机号</span>
-        <input id="phoneNumber" name="phoneNumber" th:value="${phoneNumber}" type="number"
+        <input id="phoneNumber" name="phoneNumber" th:value="${phoneNumber}" type="tel"
                placeholder="188888888888"
-               aria-describedby="basic-addon2"/>
+               aria-describedby="basic-addon2" required/>
         <button type="submit" style="width:190px;" name="action" th:text="${sendSMS}">获取验证码</button>
     </div>
     <br/>
     <div>
         <span id="basic-addon4">验证码</span>
-        <input id="verify_code" name="verifyCode" type="text" placeholder="验证码" aria-describedby="basic-addon2"/>
+        <input id="verify_code" name="verifyCode" type="text" placeholder="验证码" aria-describedby="basic-addon2"
+               required/>
     </div>
     <br/>
     <button type="submit" style="width:190px;" name="action" value="login">登陆</button>
     <button type="submit" style="width:190px;" name="action" value="login_agreement">登陆须知</button>
 </form>
+
 </body>
 </html>
+
+

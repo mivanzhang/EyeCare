@@ -6,12 +6,16 @@
     <meta charset="UTF-8">
     <title>注册爱眼课堂</title>
 </head>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+
 <body>
 <form th:action="@{/user_register}" method="post">
     <div>
         <span id="basic-addon3">手机号</span>
         <input id="phoneNumber" name="phoneNumber" type="number" placeholder="188888888888"
-               aria-describedby="basic-addon2"/>
+               aria-describedby="basic-addon2" required/>
         <button type="button" style="width:190px;" method="get" onclick="" th:onclick="@{/getSmsCode}">获取验证码</button>
     </div>
     <br/>
