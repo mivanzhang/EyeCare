@@ -31,7 +31,6 @@ public class HomePageController {
     }
 
 
-
     @RequestMapping(value = "/query", method = RequestMethod.POST)
     public String query(ModelMap map, @ModelAttribute(value = "query") Query query) {
         // 加入一个属性，用来在模板中读取
@@ -40,9 +39,9 @@ public class HomePageController {
     }
 
     @RequestMapping(value = "/getSmsCode", method = RequestMethod.GET)
-    public String sendSMSCode(ModelMap map, String managerPhoneNumber) {
+    public void sendSMSCode(ModelMap map, String phoneNumber) {
         // 加入一个属性，用来在模板中读取
+        System.out.println(phoneNumber);
         // return模板文件的名称，对应src/main/resources/templates/index.html
-        return "index";
     }
 }

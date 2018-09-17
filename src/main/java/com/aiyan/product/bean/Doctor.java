@@ -2,56 +2,40 @@ package com.aiyan.product.bean;
 
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table
-public class School {
+public class Doctor {
     @Id
     @GeneratedValue
-    private int schoolId;
+    private int doctorId;
     @Column(nullable = false)
-    private String schoolName;
+    private String hospitalName;
     @Column(nullable = false)
     private String managerName;
     @Column(nullable = false)
     private String managerPhoneNumber;
+    //单位证明函
     private String authrize;
+    private String doctorDocument;
     private String idCardPath;
     //表示学校的状态
     private int status;
-    @OneToMany(mappedBy = "school")
-    private List<Student> studentList;
-    public String getIdCardPath() {
-        return idCardPath;
+
+    public int getDoctorId() {
+        return doctorId;
     }
 
-    public List<Student> getStudentList() {
-        return studentList;
+    public void setDoctorId(int doctorId) {
+        this.doctorId = doctorId;
     }
 
-    public void setStudentList(List<Student> studentList) {
-        this.studentList = studentList;
+    public String getHospitalName() {
+        return hospitalName;
     }
 
-    public void setIdCardPath(String idCardPath) {
-        this.idCardPath = idCardPath;
-    }
-
-    public int getSchoolId() {
-        return schoolId;
-    }
-
-    public void setSchoolId(int schoolId) {
-        this.schoolId = schoolId;
-    }
-
-    public String getSchoolName() {
-        return schoolName;
-    }
-
-    public void setSchoolName(String schoolName) {
-        this.schoolName = schoolName;
+    public void setHospitalName(String hospitalName) {
+        this.hospitalName = hospitalName;
     }
 
     public String getManagerName() {
@@ -78,6 +62,22 @@ public class School {
         this.authrize = authrize;
     }
 
+    public String getDoctorDocument() {
+        return doctorDocument;
+    }
+
+    public void setDoctorDocument(String doctorDocument) {
+        this.doctorDocument = doctorDocument;
+    }
+
+    public String getIdCardPath() {
+        return idCardPath;
+    }
+
+    public void setIdCardPath(String idCardPath) {
+        this.idCardPath = idCardPath;
+    }
+
     public int getStatus() {
         return status;
     }
@@ -85,5 +85,4 @@ public class School {
     public void setStatus(int status) {
         this.status = status;
     }
-
 }
