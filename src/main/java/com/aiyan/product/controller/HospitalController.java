@@ -1,7 +1,9 @@
 package com.aiyan.product.controller;
 
+import com.aiyan.product.bean.Doctor;
 import com.aiyan.product.bean.School;
 import com.aiyan.product.common.Constants;
+import com.aiyan.product.jpa.DoctorRepository;
 import com.aiyan.product.jpa.SchoolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,8 +15,8 @@ import java.util.Optional;
 
 @Controller
 public class HospitalController {
-//    @Autowired
-//    protected H schoolRepository;
+    @Autowired
+    protected DoctorRepository doctorRepository;
 
     @RequestMapping("hospital_login")
     public String requestSchoolLogin(ModelMap map) {
@@ -23,10 +25,11 @@ public class HospitalController {
     }
 
     @RequestMapping("try_hospital_login")
-    public String schoolLogin(@RequestParam String action, ModelMap map,@RequestParam String phoneNumber,@RequestParam String name) {
+    public String schoolLogin(@RequestParam String action, ModelMap map, @RequestParam String phoneNumber, @RequestParam String name) {
         //登陆
         if ("login".equals(action)) {
             // 加入一个属性，用来在模板中读取
+//            Optional<School> optionalSchool = schoolRepository.findSchoolBySchoolName(school.getSchoolName());
             // return模板文件的名称，对应src/main/resources/templates/index.html
 //            if (optionalSchool.isPresent()) {
 //                return "common/success";
@@ -51,33 +54,51 @@ public class HospitalController {
         return "hospital/register_step1";
     }
 
-//    @RequestMapping("/saveschool")
-//    public String saveSchool(ModelMap map, School school) {
-//        // 加入一个属性，用来在模板中读取
-//        // return模板文件的名称，对应src/main/resources/templates/index.html
-//        school.setStatus(Constants.SCHOOL_STATUS_STEP1);
-////        schoolRepository.save(school);
-////        map.addAttribute("schoolName", school.getSchoolName());
-////        map.addAttribute("managerPhoneNumber", school.getManagerPhoneNumber());
-////        map.addAttribute("managerName", school.getManagerName());
-//        return "school/school_register_step2";
-//    }
-//
+    @RequestMapping("/savehospital")
+    public String saveSchool(ModelMap map, Doctor doctor, @RequestParam String action) {
+        // 加入一个属性，用来在模板中读取
+        if ("".equals(action) || action.length() < 1) {
+            //发送验证码
+            map.addAttribute("hospitalName", doctor.getHospitalName());
+            map.addAttribute("managerPhoneNumber", doctor.getManagerPhoneNumber());
+            map.addAttribute("sendSMS", "已发送");
+            map.addAttribute("managerName", doctor.getManagerName());
+            return "hospital/register_step1";
+        }
+
+        // return模板文件的名称，对应src/main/resources/templates/index.html
+        doctor.setStatus(Constants.SCHOOL_STATUS_STEP1);
+        doctorRepository.save(doctor);
+        map.addAttribute("hospitalName", doctor.getHospitalName());
+        map.addAttribute("managerPhoneNumber", doctor.getManagerPhoneNumber());
+        map.addAttribute("managerName", doctor.getManagerName());
+        map.addAttribute("sendSMS", "获取验证码");
+        return "hospital/register_step2";
+    }
+
 //    @RequestMapping("/verifyschool")
 //    public String verifyschool(ModelMap map, School school) {
 //        // 加入一个属性，用来在模板中读取
 //        // return模板文件的名称，对应src/main/resources/templates/index.html
 //        school.setStatus(Constants.SCHOOL_STATUS_JUDGING);
-////        schoolRepository.save(school);
+//        schoolRepository.save(school);
 //        return "school/school_register_step2";
 //    }
-//
-//    @RequestMapping("/finishInputSchool")
-//    public String finishInputSchool(ModelMap map, School school) {
-//        // 加入一个属性，用来在模板中读取
-//        // return模板文件的名称，对应src/main/resources/templates/index.html
-//        school.setStatus(Constants.SCHOOL_STATUS_JUDGING);
-////        schoolRepository.save(school);
-//        return "common/success";
-//    }
+
+    @RequestMapping("/finishInputHospital")
+    public String finishInputSchool(ModelMap map, Doctor doctor, @RequestParam String action) {
+        if ("".equals(action) || action.length() < 1) {
+            //发送验证码
+            map.addAttribute("hospitalName", doctor.getHospitalName());
+            map.addAttribute("managerPhoneNumber", doctor.getManagerPhoneNumber());
+            map.addAttribute("sendSMS", "已发送");
+            map.addAttribute("managerName", doctor.getManagerName());
+            return "hospital/register_step2";
+        }
+        // 加入一个属性，用来在模板中读取
+        // return模板文件的名称，对应src/main/resources/templates/index.html
+        doctor.setStatus(Constants.SCHOOL_STATUS_JUDGING);
+        doctorRepository.save(doctor);
+        return "common/success";
+    }
 }
