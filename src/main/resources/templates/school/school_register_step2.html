@@ -10,7 +10,7 @@
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
 
 <body>
-<form th:action="@{/finishInputSchool}" method="post">
+<form th:action="@{/finishInputSchool}" method="post" enctype="multipart/form-data">
     <div>
         <!--/*@thymesVar id="error" type=""*/-->
         <span id="basic-addon0">&nbsp;</span>
@@ -31,16 +31,11 @@
     </div>
     <div>
         <span id="basic-addon3">身份证照片</span>
-        <button id="idCard_picture" type="text"
-                aria-describedby="basic-addon2">上传
-        </button>
+        <input type="file" name="id_card"/><br/><br/>
     </div>
     <div>
         <span id="basic-addon4">学校证明函</span>
-        <!--<input id="authenrien" name="authenrien" type="text" placeholder="188888888888"-->
-        <!--aria-describedby="basic-addon3"/>-->
-        <button id="authenrien" name="authenrien"
-                aria-describedby="basic-addon2">上传
+        <input type="file" name="prof"/><br/><br/>
         </button>
     </div>
     <br/>
