@@ -27,8 +27,10 @@ public class UserController {
         // return模板文件的名称，对应src/main/resources/templates/index.html
 //        school.setStatus(Constants.SCHOOL_STATUS_JUDGING);
 //        schoolRepository.save(school);
-        user.setRole(Constants.USER_ROLE_COMMON_USER);
-        userRepository.save(user);
+        if (!userRepository.findUserByPhoneNumber(user.getPhoneNumber()).isPresent()) {
+            user.setRole(Constants.USER_ROLE_COMMON_USER);
+            userRepository.save(user);
+        }
         return "common/success";
     }
 }

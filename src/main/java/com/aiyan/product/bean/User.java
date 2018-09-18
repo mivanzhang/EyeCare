@@ -4,6 +4,7 @@ import com.aiyan.product.common.Constants;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table
@@ -15,14 +16,18 @@ public class User {
     @Column(nullable = false)
     private String phoneNumber;
     private String weiXinId;
-    //校方的管理人员
-    private String schoolId;
+    @Column(nullable = false)
+    private String token;
 
     @ManyToMany
     @JoinTable(name = "user_watcher_list", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "student_id"))
     private List<Student> studentIdList;
 
     private int role = Constants.USER_ROLE_COMMON_USER;
+
+    public User() {
+        token = UUID.randomUUID().toString().substring(0, 16);
+    }
 
     public List<Student> getStudentIdList() {
         return studentIdList;
@@ -38,14 +43,6 @@ public class User {
 
     public void setStudentIdList(List<Student> studentIdList) {
         this.studentIdList = studentIdList;
-    }
-
-    public String getSchoolId() {
-        return schoolId;
-    }
-
-    public void setSchoolId(String schoolId) {
-        this.schoolId = schoolId;
     }
 
     public String getUserName() {
@@ -80,4 +77,11 @@ public class User {
         this.role = role;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 }

@@ -2,9 +2,11 @@ package com.aiyan.product.controller;
 
 import com.aiyan.product.bean.Doctor;
 import com.aiyan.product.bean.School;
+import com.aiyan.product.bean.User;
 import com.aiyan.product.common.Constants;
 import com.aiyan.product.jpa.DoctorRepository;
 import com.aiyan.product.jpa.SchoolRepository;
+import com.aiyan.product.jpa.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,6 +19,8 @@ import java.util.Optional;
 public class HospitalController {
     @Autowired
     protected DoctorRepository doctorRepository;
+    @Autowired
+    protected UserRepository userRepository;
 
     @RequestMapping("hospital_login")
     public String requestSchoolLogin(ModelMap map) {
@@ -65,7 +69,13 @@ public class HospitalController {
             map.addAttribute("managerName", doctor.getManagerName());
             return "hospital/register_step1";
         }
+        if (userRepository.findUserByPhoneNumber(doctor.getManagerPhoneNumber()).isPresent()) {
 
+        } else {
+            User user = new User();
+            user.setPhoneNumber(doctor.getManagerPhoneNumber());
+            userRepository.save(user);
+        }
         // return模板文件的名称，对应src/main/resources/templates/index.html
         doctor.setStatus(Constants.SCHOOL_STATUS_STEP1);
         doctorRepository.save(doctor);
@@ -75,15 +85,6 @@ public class HospitalController {
         map.addAttribute("sendSMS", "获取验证码");
         return "hospital/register_step2";
     }
-
-//    @RequestMapping("/verifyschool")
-//    public String verifyschool(ModelMap map, School school) {
-//        // 加入一个属性，用来在模板中读取
-//        // return模板文件的名称，对应src/main/resources/templates/index.html
-//        school.setStatus(Constants.SCHOOL_STATUS_JUDGING);
-//        schoolRepository.save(school);
-//        return "school/school_register_step2";
-//    }
 
     @RequestMapping("/finishInputHospital")
     public String finishInputSchool(ModelMap map, Doctor doctor, @RequestParam String action) {
