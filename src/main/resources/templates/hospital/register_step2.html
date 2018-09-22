@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="/css/common.css"/>
 </head>
 <body>
-<form th:action="@{/finishInputHospital}" method="post">
+<form th:action="@{/finishInputHospital}" method="post" enctype="multipart/form-data">
     <div>
         <!--/*@thymesVar id="error" type=""*/-->
         <span id="basic-addon0">&nbsp;</span>
@@ -26,30 +26,19 @@
                aria-describedby="basic-addon2"/>
     </div>
     <div>
-        <span id="basic-addon3">身份证照片</span>
-        <button id="idCardPath" type="text"
-                aria-describedby="basic-addon2">上传
-        </button>
-    </div>
-    <div>
-        <span id="basic-addon4">学校证明函</span>
-        <button id="authrize" name="authrize"
-                aria-describedby="basic-addon2">上传
-        </button>
-    </div>
-    <br/>
-    <div>
         <span id="basic-addon5">手机号</span>
         <input id="managerPhoneNumber" name="managerPhoneNumber" th:value="${managerPhoneNumber}" type="tel"
                placeholder="188888888888"
                aria-describedby="basic-addon2"/>
-        <button type="submit" style="width:190px;" name="action" th:text="${sendSMS}">获取验证码</button>
     </div>
     <br/>
-
     <div>
-        <span id="basic-addon7">验证码</span>
-        <input id="verify_code" name="verifyCode" type="text" placeholder="验证码" aria-describedby="basic-addon2"/>
+        <span id="basic-addon3">身份证照片</span>
+        <input type="file" name="id_card"/><br/><br/>
+    </div>
+    <div>
+        <span id="basic-addon4">学校证明函</span>
+        <input type="file" name="prof"/><br/><br/>
     </div>
     <br/>
     <button type="submit" style="width:190px;" name="action" value="login">提交审核（大约2-3个工作日）</button>

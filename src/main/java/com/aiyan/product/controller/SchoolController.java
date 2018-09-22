@@ -23,6 +23,7 @@ public class SchoolController {
     protected SchoolRepository schoolRepository;
     @Autowired
     protected UserRepository userRepository;
+    private School mSchool;
 
     @RequestMapping("school_login")
     public String requestSchoolLogin(ModelMap map) {
@@ -91,7 +92,7 @@ public class SchoolController {
         // 加入一个属性，用来在模板中读取
         // return模板文件的名称，对应src/main/resources/templates/index.html
         school.setStatus(Constants.SCHOOL_STATUS_STEP1);
-        school = schoolRepository.save(school);
+        mSchool = schoolRepository.save(school);
         map.addAttribute("schoolName", school.getSchoolName());
         map.addAttribute("managerPhoneNumber", school.getManagerPhoneNumber());
         map.addAttribute("managerName", school.getManagerName());
@@ -103,29 +104,41 @@ public class SchoolController {
         return true;
     }
 
-    @RequestMapping("/verifyschool")
-    public String verifyschool(ModelMap map, School school) {
-        // 加入一个属性，用来在模板中读取
-        // return模板文件的名称，对应src/main/resources/templates/index.html
-        school.setStatus(Constants.SCHOOL_STATUS_JUDGING);
-        schoolRepository.save(school);
-        return "school/school_register_step2";
-    }
+//    @RequestMapping("/verifyschool")
+//    public String verifyschool(ModelMap map, School school) {
+//        // 加入一个属性，用来在模板中读取
+//        // return模板文件的名称，对应src/main/resources/templates/index.html
+//        school.setStatus(Constants.SCHOOL_STATUS_JUDGING);
+//        schoolRepository.save(school);
+//        return "school/school_register_step2";
+//    }
 
-    private static final String DIRECTORY = "/Users/mivanzhang/Desktop/tmp/";
+
 
     @RequestMapping("/finishInputSchool")
-    public String finishInputSchool(ModelMap map, School school, @RequestParam String action, @RequestParam("id_card") MultipartFile idCardFile) {
-        if ("".equals(action) || action.length() < 1) {
-            //发送验证码
-            map.addAttribute("schoolName", school.getSchoolName());
-            map.addAttribute("managerPhoneNumber", school.getManagerPhoneNumber());
-            map.addAttribute("sendSMS", "已发送");
-            map.addAttribute("managerName", school.getManagerName());
-            return "school/school_register_step2";
-        }
-        String path = DIRECTORY + school.getManagerPhoneNumber() + "/idCardFile.png";
-        if (!idCardFile.isEmpty()) {
+    public String finishInputSchool(ModelMap map, School school, @RequestParam String action,
+                                    @RequestParam("id_card") MultipartFile idCardFile, @RequestParam("prof") MultipartFile prof) {
+        String idCardPath = Constants.DIRECTORY + school.getManagerPhoneNumber() + "/idCardFile.png";
+        if (saveUploadFile(idCardFile, idCardPath)) return "common/fail";
+
+        String authrizePath = Constants.DIRECTORY + school.getManagerPhoneNumber() + "/prof.png";
+        if (saveUploadFile(prof, authrizePath)) return "common/fail";
+
+
+        // 加入一个属性，用来在模板中读取
+        // return模板文件的名称，对应src/main/resources/templates/index.html
+        mSchool.setAuthrize(authrizePath);
+        mSchool.setIdCardPath(idCardPath);
+        mSchool.setStatus(Constants.SCHOOL_STATUS_JUDGING);
+        mSchool.setSchoolName(school.getSchoolName());
+        mSchool.setManagerPhoneNumber(school.getManagerPhoneNumber());
+        mSchool.setManagerName(school.getManagerName());
+        mSchool = schoolRepository.save(mSchool);
+        return "common/success";
+    }
+
+    private boolean saveUploadFile(MultipartFile prof, String path) {
+        if (!prof.isEmpty()) {
             try {
                 File file = new File(path);
                 if (!file.exists()) {
@@ -136,23 +149,16 @@ public class SchoolController {
                 // 还有关于文件格式限制、文件大小限制，详见：中配置。
                 BufferedOutputStream out = new BufferedOutputStream(
                         new FileOutputStream(file));
-                out.write(idCardFile.getBytes());
+                out.write(prof.getBytes());
                 out.flush();
                 out.close();
             } catch (Exception e) {
                 e.printStackTrace();
-                return "common/fail";
+                return true;
             }
         } else {
-//            return "上传失败，因为文件是空的.";
-            return "common/fail";
+            return true;
         }
-
-        // 加入一个属性，用来在模板中读取
-        // return模板文件的名称，对应src/main/resources/templates/index.html
-        school.setAuthrize(path);
-        school.setStatus(Constants.SCHOOL_STATUS_JUDGING);
-        schoolRepository.save(school);
-        return "common/success";
+        return false;
     }
 }
