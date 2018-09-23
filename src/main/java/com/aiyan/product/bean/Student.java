@@ -8,32 +8,31 @@ import java.util.List;
 public class Student {
     @Id
     @GeneratedValue
-    private String studentId;
+    private int studentId;
     @ManyToMany
     @JoinTable(name = "user_watcher_list", joinColumns = @JoinColumn(name = "student_id "), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> watcherList;
     //三年级几班
     @Column(nullable = false)
-    private String userName;
+    private String name;
     private String gradeNum;
     private String classNum;
     @Column(nullable = false)
     private String studentNo;
     private boolean isWearGlass;
-    private String leftEyeDegree;
-    private String rightEyeDegree;
     private String birthDay;
-    private int age;
+    private String weight;
+    private String height;
     private boolean sex;
     @ManyToOne
     @JoinColumn(name = "school_id")
     private School school;
 
-    public String getStudentId() {
+    public int getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(String studentId) {
+    public void setStudentId(int studentId) {
         this.studentId = studentId;
     }
 
@@ -53,12 +52,12 @@ public class Student {
         this.school = school;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getGradeNum() {
@@ -93,22 +92,6 @@ public class Student {
         isWearGlass = wearGlass;
     }
 
-    public String getLeftEyeDegree() {
-        return leftEyeDegree;
-    }
-
-    public void setLeftEyeDegree(String leftEyeDegree) {
-        this.leftEyeDegree = leftEyeDegree;
-    }
-
-    public String getRightEyeDegree() {
-        return rightEyeDegree;
-    }
-
-    public void setRightEyeDegree(String rightEyeDegree) {
-        this.rightEyeDegree = rightEyeDegree;
-    }
-
     public String getBirthDay() {
         return birthDay;
     }
@@ -117,19 +100,27 @@ public class Student {
         this.birthDay = birthDay;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     public boolean isSex() {
         return sex;
     }
 
     public void setSex(boolean sex) {
         this.sex = sex;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
+    public String getHeight() {
+        return height;
+    }
+
+    public void setHeight(String height) {
+        this.height = height;
     }
 }

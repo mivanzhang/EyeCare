@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="common/header :: head"></th:block>
+<head>
+    <meta charset="UTF-8">
+    <title>编辑学生</title>
+</head>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+
+<body>
+<form th:action="@{/save_student}" method="post">
+    <div>
+        <span id="basic-addon1">全称学校名</span>
+        <input id="schoolName" name="schoolName" th:value="${schoolName}" type="text" placeholder="学校名全称(必填)"
+               aria-describedby="basic-addon2" readonly="readonly"/>
+    </div>
+    <br/>
+    <div>
+        <span id="basic-addon2">年级</span>
+        <input name="gradeNum" th:value="${student.gradeNum}" type="text" placeholder="三年级"
+               aria-describedby="basic-addon2" required/>
+    </div>
+    <br/>
+    <div>
+        <span id="basic-addon3">班级</span>
+        <input name="classNum" th:value="${student.classNum}" type="text" placeholder="一班(必填)"
+               aria-describedby="basic-addon2" required/>
+    </div>
+    <br/>
+    <div>
+        <span id="basic-addon4">学号</span>
+        <input name="studentNo" th:value="${student.studentNo}" type="text" placeholder="学号(必填)"
+               aria-describedby="basic-addon2" required/>
+    </div>
+    <br/>
+    <div>
+        <span id="basic-addon5">姓名</span>
+        <input name="name" th:value="${student.name}" type="text" placeholder="姓名(必填)"
+               aria-describedby="basic-addon2" required/>
+    </div>
+    <br/>
+
+    <div>
+        <span id="basic-addon6">性别</span>
+        <input value="1" name="sex" th:checked="${student.sex} == 1" type="radio"
+               aria-describedby="basic-addon2"/>男
+        <input th:checked="${student.sex} == 0" type="radio" value="0"
+               name="sex" aria-describedby="basic-addon2"/>女
+    </div>
+    <br/>
+    <div>
+        <span id="basic-addon7">生日</span>
+        <input id="birthDay" name="birthDay" th:value="${student.birthDay}" type="text" placeholder="20010809"
+               aria-describedby="basic-addon2"/>
+    </div>
+    <br/>
+    <div>
+        <span id="basic-addon8">身高</span>
+        <input id="height" name="height" th:value="${student.height}" type="text" placeholder="145cm"
+               aria-describedby="basic-addon2"/>
+    </div>
+    <div>
+        <span id="basic-addon9">体重</span>
+        <input id="weight" name="weight" th:value="${student.weight}" type="text" placeholder="35kg"
+               aria-describedby="basic-addon2"/>
+    </div>
+    <br/>
+
+    <br/>
+    <button type="submit" style="width:190px;" name="action" value="login">确定</button>
+</form>
+
+</body>
+</html>
+
+

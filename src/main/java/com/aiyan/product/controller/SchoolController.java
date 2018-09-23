@@ -1,9 +1,11 @@
 package com.aiyan.product.controller;
 
 import com.aiyan.product.bean.School;
+import com.aiyan.product.bean.Student;
 import com.aiyan.product.bean.User;
 import com.aiyan.product.common.Constants;
 import com.aiyan.product.jpa.SchoolRepository;
+import com.aiyan.product.jpa.StudentRepository;
 import com.aiyan.product.jpa.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,8 @@ public class SchoolController {
     protected SchoolRepository schoolRepository;
     @Autowired
     protected UserRepository userRepository;
+    @Autowired
+    protected StudentRepository studentRepository;
     private School mSchool;
 
     @RequestMapping("school_login")
@@ -114,7 +118,6 @@ public class SchoolController {
 //    }
 
 
-
     @RequestMapping("/finishInputSchool")
     public String finishInputSchool(ModelMap map, School school, @RequestParam String action,
                                     @RequestParam("id_card") MultipartFile idCardFile, @RequestParam("prof") MultipartFile prof) {
@@ -134,7 +137,8 @@ public class SchoolController {
         mSchool.setManagerPhoneNumber(school.getManagerPhoneNumber());
         mSchool.setManagerName(school.getManagerName());
         mSchool = schoolRepository.save(mSchool);
-        return "common/success";
+        map.put("student", new Student());
+        return "school/school_edite_student";
     }
 
     private boolean saveUploadFile(MultipartFile prof, String path) {
@@ -160,5 +164,22 @@ public class SchoolController {
             return true;
         }
         return false;
+    }
+
+
+    @RequestMapping("/edit_student")
+    public String editStudent(ModelMap map) {
+        map.put("student", new Student());
+//        map.put("schoolName", mSchool.getSchoolName());
+        return "school/school_edite_student";
+    }
+
+    @RequestMapping("/save_student")
+    public String commitStudent(ModelMap map, Student student, @RequestParam int sex) {
+        map.put("student", new Student());
+        student.setSex(sex == 1);
+        student.setSchool(mSchool);
+        studentRepository.save(student);
+        return "school/school_edite_student";
     }
 }
