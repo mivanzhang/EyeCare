@@ -9,4 +9,10 @@ import java.util.Optional;
 public interface SchoolRepository extends JpaRepository<School, Long> {
 
     Optional<School> findSchoolBySchoolName(String schoolName);
+
+    Optional<School> findSchoolByManagerPhoneNumber(String managerPhoneNumber);
+
+    void deleteSchoolBySchoolId(int schoolId);
+
+    void deleteSchoolByManagerPhoneNumber(String phoneNumber);
 }

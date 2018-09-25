@@ -79,6 +79,7 @@ public class HospitalController {
 
         } else {
             User user = new User();
+            user.setRole(Constants.USER_ROLE_DOCTOR);
             user.setPhoneNumber(doctor.getManagerPhoneNumber());
             userRepository.save(user);
         }

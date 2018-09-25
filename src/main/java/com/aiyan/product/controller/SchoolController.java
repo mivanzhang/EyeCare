@@ -7,17 +7,19 @@ import com.aiyan.product.common.Constants;
 import com.aiyan.product.jpa.SchoolRepository;
 import com.aiyan.product.jpa.StudentRepository;
 import com.aiyan.product.jpa.UserRepository;
+import org.apache.juli.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 @Controller
 public class SchoolController {
@@ -91,6 +93,7 @@ public class SchoolController {
         } else {
             User user = new User();
             user.setPhoneNumber(school.getManagerPhoneNumber());
+            user.setRole(Constants.USER_ROLE_SCHOOL_MANAGER);
             userRepository.save(user);
         }
         // 加入一个属性，用来在模板中读取
@@ -166,11 +169,23 @@ public class SchoolController {
         return false;
     }
 
-
     @RequestMapping("/edit_student")
-    public String editStudent(ModelMap map) {
-        map.put("student", new Student());
-//        map.put("schoolName", mSchool.getSchoolName());
+    public String editStudent(ModelMap map, @ModelAttribute("id") String id, HttpSession session) {
+        Student student = studentRepository.findById(61l).get();
+        if (student == null) {
+            student = new Student();
+        }
+        map.put("student", student);
+        if (mSchool == null) {
+            String userToken = (String) session.getAttribute("token");
+            Optional<User> userOptional = userRepository.findUserByToken(userToken);
+            if (!userOptional.isPresent()) {
+                map.put("message", "登陆用户不存在");
+                return "common/error";
+            }
+            mSchool = schoolRepository.findSchoolByManagerPhoneNumber(userOptional.get().getPhoneNumber()).get();
+        }
+        map.put("schoolName", mSchool.getSchoolName());
         return "school/school_edite_student";
     }
 
@@ -182,4 +197,31 @@ public class SchoolController {
         studentRepository.save(student);
         return "school/school_edite_student";
     }
+    @Transactional
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public String deleteStudent(ModelMap map, @PathVariable int id, HttpSession session) {
+        String userToken = (String) session.getAttribute("token");
+        Optional<User> userOptional = userRepository.findUserByToken(userToken);
+        if (!userOptional.isPresent()) {
+            map.put("message", "登陆用户不存在");
+            return "common/error";
+        }
+//        userRepository.deleteUserByUserId(id);
+        studentRepository.deleteStudentByStudentId(id);
+        map.put("message", "删除成功");
+        return "common/success";
+    }
+
+    @RequestMapping(value = "/edite/{id}", method = RequestMethod.GET)
+    public String updateUser(ModelMap map, @PathVariable Long id, HttpSession session, RedirectAttributes attr) {
+
+        String userToken = (String) session.getAttribute("token");
+        if (!userRepository.findUserByToken(userToken).isPresent()) {
+            map.put("message", "登陆用户不存在");
+            return "common/error";
+        }
+        attr.addFlashAttribute("id", id);
+        return "redirect:edit_student";
+    }
+
 }

@@ -8,4 +8,9 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findUserByPhoneNumber(String phoneNumber);
+
+    Optional<User> findUserByToken(String token);
+
+    void deleteUserByUserId(int userid);
+
 }
