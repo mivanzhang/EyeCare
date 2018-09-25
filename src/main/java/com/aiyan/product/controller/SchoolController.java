@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.io.*;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -170,10 +171,11 @@ public class SchoolController {
     }
 
     @RequestMapping("/edit_student")
-    public String editStudent(ModelMap map, @ModelAttribute("id") String id, HttpSession session) {
-        Student student = studentRepository.findById(61l).get();
-        if (student == null) {
-            student = new Student();
+    public String editStudent(ModelMap map, @ModelAttribute("id") int id, HttpSession session) {
+        Optional<Student> studentOptional = studentRepository.findStudentByStudentId(id);
+        Student student = new Student();
+        if (studentOptional.isPresent()) {
+            student = studentOptional.get();
         }
         map.put("student", student);
         if (mSchool == null) {
@@ -195,8 +197,11 @@ public class SchoolController {
         student.setSex(sex == 1);
         student.setSchool(mSchool);
         studentRepository.save(student);
-        return "school/school_edite_student";
+        List<Student> students = mSchool.getStudentList();
+        map.put("students", students);
+        return "school/school_student_list";
     }
+
     @Transactional
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteStudent(ModelMap map, @PathVariable int id, HttpSession session) {
@@ -212,8 +217,8 @@ public class SchoolController {
         return "common/success";
     }
 
-    @RequestMapping(value = "/edite/{id}", method = RequestMethod.GET)
-    public String updateUser(ModelMap map, @PathVariable Long id, HttpSession session, RedirectAttributes attr) {
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
+    public String updateStudent(ModelMap map, @PathVariable Long id, HttpSession session, RedirectAttributes attr) {
 
         String userToken = (String) session.getAttribute("token");
         if (!userRepository.findUserByToken(userToken).isPresent()) {
@@ -221,7 +226,7 @@ public class SchoolController {
             return "common/error";
         }
         attr.addFlashAttribute("id", id);
-        return "redirect:edit_student";
+        return "redirect:/edit_student";
     }
 
 }

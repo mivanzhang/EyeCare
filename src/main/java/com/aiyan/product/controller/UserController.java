@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @RequestMapping("/user_register")
-    public String userRegister(ModelMap map, User user, HttpSession session) {
+    public String userRegister(ModelMap map, User user, HttpSession session, RedirectAttributes attr) {
         // 加入一个属性，用来在模板中读取
         // return模板文件的名称，对应src/main/resources/templates/index.html
 //        school.setStatus(Constants.SCHOOL_STATUS_JUDGING);
@@ -58,7 +58,8 @@ public class UserController {
                 if (schoolOptional.isPresent()) {
                     List<Student> students = schoolOptional.get().getStudentList();
                     if (students == null || students.size() < 1) {
-                        return "forward:edit_student";
+                        attr.addFlashAttribute("id", -1);
+                        return "redirect:edit_student";
                     }
                     map.put("students", students);
                     return "school/school_student_list";
@@ -70,9 +71,6 @@ public class UserController {
         }
         return "common/success";
     }
-
-
-
 
 
 }
