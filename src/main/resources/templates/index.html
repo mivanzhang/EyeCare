@@ -7,7 +7,7 @@
     <title>爱眼课堂</title>
 </head>
 <body>
-<form th:action="@{/query}" method="post"  >
+<form th:action="@{/query}" method="post">
     <div>
         <!--/*@thymesVar id="error" type=""*/-->
         <span id="basic-addon0">&nbsp;</span>
@@ -38,5 +38,9 @@
     <button type="submit" style="width:190px;">开始查询</button>
     <p>注：正确输入【姓名】+【前三项任意一项】即可</p>
 </form>
+<h3><a th:href="@{/user_login}">用户登陆</a></h3>
+<h3><a th:href="@{/school_register}">学校注册</a></h3>
+<h3><a th:href="@{/hospital_register}">验光师注册</a></h3>
+
 </body>
 </html>

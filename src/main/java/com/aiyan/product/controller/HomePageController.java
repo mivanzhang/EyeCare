@@ -44,4 +44,21 @@ public class HomePageController {
         System.out.println(phoneNumber);
         // return模板文件的名称，对应src/main/resources/templates/index.html
     }
+
+    @RequestMapping(value = "/user_login", method = RequestMethod.GET)
+    public String userLogin(ModelMap map) {
+        return "register";
+    }
+
+    @RequestMapping(value = "/school_register", method = RequestMethod.GET)
+    public String schoolRegister(ModelMap map) {
+        map.put("sendSMS","获取验证码");
+        return "school/school_register_step1";
+    }
+
+    @RequestMapping(value = "/hospital_register", method = RequestMethod.GET)
+    public String hospitalRegister(ModelMap map) {
+        map.put("sendSMS","获取验证码");
+        return "hospital/register_step1";
+    }
 }
