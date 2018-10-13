@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="common/header :: head"></th:block>
+<head>
+    <meta charset="UTF-8">
+    <title>编辑学生</title>
+</head>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+
+<body>
+
+<!--<h3><a th:href="@{/managerdoctor}">管理验光师</a></h3>-->
+<!--<h3><a th:href="@{/addStudent}">添加学生</a></h3>-->
+<h2 th:text="${schoolName}+'学生列表'" id="schoolName"></h2>
+<!--<input type="hidden" th:value="${schoolId}" id="schoolId" name="schoolId"/>-->
+<table>
+    <thead>
+    <tr>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>年级</th>
+        <th>班级</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="student: ${students}">
+        <td><span class="list" th:text="${student.studentNo}"></span></td>
+        <td><span class="list" th:text="${student.name}"></span></td>
+        <td><span class="list" th:text="${student.gradeNum}"></span></td>
+        <td><span class="list" th:text="${student.classNum}"></span></td>
+        <td><span class="list"><a
+                th:href="@{/edite_record/{studentId}/{schoolid}(studentId=${student.studentId},schoolid=${schoolId})}">编辑检测表</a></span></td>
+    </tr>
+    </tbody>
+</body>
+</html>
+
+

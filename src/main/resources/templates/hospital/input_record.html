@@ -9,7 +9,7 @@
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
-
+<input type="hidden" th:value="${schoolId}" id="schoolId"/>
 <body>
 <form th:action="@{/finishInputRecord}" method="post">
     <div>
@@ -51,26 +51,29 @@
                name="sex" aria-describedby="basic-addon2"/>女
     </div>
     <br/>
-    <div>
-        <span id="basic-addon7">生日</span>
-        <input id="birthDay" name="birthDay" th:value="${student.birthDay}" type="text" placeholder="20010809"
-               aria-describedby="basic-addon2"/>
-    </div>
-    <br/>
-    <div>
-        <span id="basic-addon8">身高</span>
-        <input id="height" name="height" th:value="${student.height}" type="text" placeholder="145"
-               aria-describedby="basic-addon2"/>cm
-    </div>
-    <div>
-        <span id="basic-addon9">体重</span>
-        <input id="weight" name="weight" th:value="${student.weight}" type="text" placeholder="35"
-               aria-describedby="basic-addon2"/>kg
-    </div>
-    <br/>
 
-    <br/>
-    <button type="submit" style="width:190px;" name="action" value="login">确定</button>
+    <!--<div>-->
+    <!--<span id="basic-addon7">生日</span>-->
+    <!--<input id="birthDay" name="birthDay" th:value="${student.birthDay}" type="text" placeholder="20010809"-->
+    <!--aria-describedby="basic-addon2"/>-->
+    <!--</div>-->
+    <!--<br/>-->
+    <!--<div>-->
+    <!--<span id="basic-addon8">身高</span>-->
+    <!--<input id="height" name="height" th:value="${student.height}" type="text" placeholder="145"-->
+    <!--aria-describedby="basic-addon2"/>cm-->
+    <!--</div>-->
+    <!--<div>-->
+    <!--<span id="basic-addon9">体重</span>-->
+    <!--<input id="weight" name="weight" th:value="${student.weight}" type="text" placeholder="35"-->
+    <!--aria-describedby="basic-addon2"/>kg-->
+    <!--</div>-->
+    <!--<br/>-->
+
+    <!--<br/>-->
+
+
+    <button type="submit" style="width:190px;" name="action" value="login">提交</button>
 </form>
 
 </body>

@@ -14,5 +14,8 @@ public interface SchoolRepository extends JpaRepository<School, Long> {
 
     void deleteSchoolBySchoolId(int schoolId);
 
+
     void deleteSchoolByManagerPhoneNumber(String phoneNumber);
+
+    Optional<School> findSchoolBySchoolId(int id);
 }

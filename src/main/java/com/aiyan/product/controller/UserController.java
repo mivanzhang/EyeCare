@@ -50,7 +50,8 @@ public class UserController {
 
                 break;
             case Constants.USER_ROLE_DOCTOR:
-                break;
+
+                return "redirect:/school_list";
 
             case Constants.USER_ROLE_SCHOOL_MANAGER:
                 map.put("user", user);

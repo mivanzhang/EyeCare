@@ -34,6 +34,7 @@ public class SchoolController {
     protected DoctorRepository doctorRepository;
     private School mSchool;
 
+
     @RequestMapping("school_login")
     public String requestSchoolLogin(ModelMap map) {
         map.addAttribute("sendSMS", "获取验证码");
@@ -191,6 +192,7 @@ public class SchoolController {
         map.put("schoolName", mSchool.getSchoolName());
         return "school/school_edite_student";
     }
+
     @Transactional
     @RequestMapping("/save_student")
     public String commitStudent(ModelMap map, Student student, @RequestParam int sex) {
@@ -286,15 +288,20 @@ public class SchoolController {
     @RequestMapping("school_add_doctor")
     public String inputDoctor(ModelMap map, Doctor doctor, HttpSession session) {
         if (schoolValid(map, session)) return "common/error";
-        Optional<Doctor> doctorOptional = doctorRepository.findDoctorByManagerName(doctor.getManagerName());
+        Optional<Doctor> doctorOptional;
+        if (doctor.getManagerName() != null) {
+            doctorOptional = doctorRepository.findDoctorByManagerName(doctor.getManagerName());
+        } else {
+            doctorOptional = doctorRepository.findDoctorByManagerPhoneNumber(doctor.getManagerPhoneNumber());
+        }
+
         if (!doctorOptional.isPresent()) {
             map.put("message", "验光师不存在");
             return "common/error";
         }
         mSchool.getDoctorList().add(doctorOptional.get());
         schoolRepository.save(mSchool);
-        map.put("message", "添加成功");
-        return "common/success";
+        return "redirect:/managerdoctor";
     }
 
 

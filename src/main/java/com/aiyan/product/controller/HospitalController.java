@@ -2,18 +2,22 @@ package com.aiyan.product.controller;
 
 import com.aiyan.product.bean.Doctor;
 import com.aiyan.product.bean.School;
+import com.aiyan.product.bean.Student;
 import com.aiyan.product.bean.User;
 import com.aiyan.product.common.Constants;
 import com.aiyan.product.jpa.DoctorRepository;
 import com.aiyan.product.jpa.SchoolRepository;
+import com.aiyan.product.jpa.StudentRepository;
 import com.aiyan.product.jpa.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -26,6 +30,10 @@ public class HospitalController {
     @Autowired
     protected UserRepository userRepository;
     private Doctor mDoctor;
+    @Autowired
+    protected SchoolRepository schoolRepository;
+    @Autowired
+    protected StudentRepository studentRepository;
 
     @RequestMapping("hospital_login")
     public String requestSchoolLogin(ModelMap map) {
@@ -148,5 +156,59 @@ public class HospitalController {
         return false;
     }
 
+    @RequestMapping("/school_list")
+    public String inputEyeRecord(ModelMap map, HttpSession session) {
+        if (loginValid(map, session)) return "common/error";
+        map.put("schools", mDoctor.getSchoolList());
+        return "hospital/school_list";
+    }
 
+    private boolean loginValid(ModelMap map, HttpSession session) {
+        String userToken = (String) session.getAttribute("token");
+        Optional<User> userOptional = userRepository.findUserByToken(userToken);
+        if (mDoctor == null) {
+            mDoctor = doctorRepository.findDoctorByManagerPhoneNumber(userOptional.get().getPhoneNumber()).get();
+        }
+        if (!userOptional.isPresent() || mDoctor == null) {
+            map.put("message", "登陆用户不存在");
+            return true;
+        }
+        return false;
+    }
+
+    @RequestMapping("/studentlist/{id}")
+    public String schoolDetai(@PathVariable int id, ModelMap map, HttpSession session) {
+        if (loginValid(map, session)) return "common/error";
+        Optional<School> schoolOptional = schoolRepository.findSchoolBySchoolId(id);
+        if (!schoolOptional.isPresent()) {
+            map.put("message", "学校不存在");
+            return "common/error";
+        }
+        School school = schoolOptional.get();
+        map.put("students", school.getStudentList());
+        map.put("schoolName", school.getSchoolName());
+        map.put("schoolId", school.getSchoolId());
+        return "hospital/student_list";
+
+    }
+
+    @RequestMapping("/edite_record/{id}/{schoolId}")
+    public String editeRecord(@PathVariable int id, ModelMap map, HttpSession session, @PathVariable int  schoolId) {
+        if (loginValid(map, session)) return "common/error";
+
+        Optional<School> schoolOptional = schoolRepository.findSchoolBySchoolId(schoolId);
+        if (!schoolOptional.isPresent()) {
+            map.put("message", "学校不存在");
+            return "common/error";
+        }
+        map.put("schoolName", schoolOptional.get().getSchoolName());
+        map.put("schoolId", schoolId);
+        Optional<Student> optionalStudent = studentRepository.findStudentByStudentId(id);
+        if (!optionalStudent.isPresent()) {
+            map.put("message", "学生不存在");
+            return "common/error";
+        }
+        map.put("student", optionalStudent.get());
+        return "hospital/input_record";
+    }
 }

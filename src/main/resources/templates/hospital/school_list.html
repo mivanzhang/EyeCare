@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="common/header :: head"></th:block>
+<head>
+    <meta charset="UTF-8">
+    <title>编辑学生</title>
+</head>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+
+<body>
+<h2>我验光的学校列表</h2>
+
+<!--<h3><a th:href="@{/managerdoctor}">管理验光师</a></h3>-->
+<!--<h3><a th:href="@{/addStudent}">添加学生</a></h3>-->
+<table>
+    <thead>
+    <tr>
+        <th>学校全名</th>
+        <th>管理员姓名</th>
+        <th>管理员号码</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="school: ${schools}">
+        <td><span class="list" th:text="${school.schoolName}"></span></td>
+        <td><span class="list" th:text="${school.managerName}"></span></td>
+        <td><span class="list" th:text="${school.managerPhoneNumber}"></span></td>
+        <td><span class="list"><a th:href="@{/studentlist/{id}(id=${school.schoolId})}">学生列表</a></span>
+        </td>
+    </tr>
+    </tbody>
+</body>
+</html>
+
+
