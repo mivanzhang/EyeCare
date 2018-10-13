@@ -1,16 +1,19 @@
 package com.aiyan.product.bean;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table
+@Transactional
 public class Student {
     @Id
     @GeneratedValue
     private int studentId;
     @ManyToMany
-    @JoinTable(name = "user_watcher_list", joinColumns = @JoinColumn(name = "student_id "), inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @JoinTable(name = "user_watcher_list", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> watcherList;
     //三年级几班
     @Column(nullable = false)

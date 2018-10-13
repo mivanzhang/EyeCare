@@ -1,13 +1,14 @@
 package com.aiyan.product.controller;
 
+import com.aiyan.product.bean.Doctor;
 import com.aiyan.product.bean.School;
 import com.aiyan.product.bean.Student;
 import com.aiyan.product.bean.User;
 import com.aiyan.product.common.Constants;
+import com.aiyan.product.jpa.DoctorRepository;
 import com.aiyan.product.jpa.SchoolRepository;
 import com.aiyan.product.jpa.StudentRepository;
 import com.aiyan.product.jpa.UserRepository;
-import org.apache.juli.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +21,6 @@ import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Logger;
 
 @Controller
 public class SchoolController {
@@ -30,6 +30,8 @@ public class SchoolController {
     protected UserRepository userRepository;
     @Autowired
     protected StudentRepository studentRepository;
+    @Autowired
+    protected DoctorRepository doctorRepository;
     private School mSchool;
 
     @RequestMapping("school_login")
@@ -54,7 +56,7 @@ public class SchoolController {
         } else {
             //发送验证码
             map.addAttribute("schoolName", school.getSchoolName());
-            map.addAttribute("phoneNumber", school.getManagerPhoneNumber());
+            map.addAttribute("managerPhoneNumber", school.getManagerPhoneNumber());
             map.addAttribute("sendSMS", "已发送");
             return "school/school_login";
 
@@ -72,6 +74,13 @@ public class SchoolController {
     @RequestMapping(value = "/saveschool", method = RequestMethod.POST)
 
     public String saveSchool(ModelMap map, School school, @RequestParam String action, @RequestParam String verifyCode) {
+
+        Optional optionalSchool = schoolRepository.findSchoolByManagerPhoneNumber(school.getManagerPhoneNumber());
+        if (optionalSchool.isPresent()) {
+            map.put("message", "手机号" + school.getManagerPhoneNumber() + "已经注册，请登陆");
+            return "common/success";
+        }
+
         if ("".equals(action) || action.length() < 1) {
             //发送验证码
             map.addAttribute("schoolName", school.getSchoolName());
@@ -132,8 +141,6 @@ public class SchoolController {
         if (saveUploadFile(prof, authrizePath)) return "common/fail";
 
 
-        // 加入一个属性，用来在模板中读取
-        // return模板文件的名称，对应src/main/resources/templates/index.html
         mSchool.setAuthrize(authrizePath);
         mSchool.setIdCardPath(idCardPath);
         mSchool.setStatus(Constants.SCHOOL_STATUS_JUDGING);
@@ -141,8 +148,10 @@ public class SchoolController {
         mSchool.setManagerPhoneNumber(school.getManagerPhoneNumber());
         mSchool.setManagerName(school.getManagerName());
         mSchool = schoolRepository.save(mSchool);
-        map.put("student", new Student());
-        return "school/school_edite_student";
+//        map.put("student", new Student());
+//        return "school/school_edite_student";
+        map.put("message", "注册成功，等待审核，快速审核电话：" + Constants.USER_ROLE_SUPER_MANGER_PHONE);
+        return "common/success";
     }
 
     private boolean saveUploadFile(MultipartFile prof, String path) {
@@ -178,19 +187,11 @@ public class SchoolController {
             student = studentOptional.get();
         }
         map.put("student", student);
-        if (mSchool == null) {
-            String userToken = (String) session.getAttribute("token");
-            Optional<User> userOptional = userRepository.findUserByToken(userToken);
-            if (!userOptional.isPresent()) {
-                map.put("message", "登陆用户不存在");
-                return "common/error";
-            }
-            mSchool = schoolRepository.findSchoolByManagerPhoneNumber(userOptional.get().getPhoneNumber()).get();
-        }
+        if (schoolValid(map, session)) return "common/error";
         map.put("schoolName", mSchool.getSchoolName());
         return "school/school_edite_student";
     }
-
+    @Transactional
     @RequestMapping("/save_student")
     public String commitStudent(ModelMap map, Student student, @RequestParam int sex) {
         map.put("student", new Student());
@@ -229,4 +230,83 @@ public class SchoolController {
         return "redirect:/edit_student";
     }
 
+    @RequestMapping(value = "/manager", method = RequestMethod.GET)
+    public String managerDoctor(ModelMap map, @PathVariable Long id, HttpSession session, RedirectAttributes attr) {
+
+        String userToken = (String) session.getAttribute("token");
+        if (!userRepository.findUserByToken(userToken).isPresent()) {
+            map.put("message", "登陆用户不存在");
+            return "common/error";
+        }
+        attr.addFlashAttribute("id", id);
+        return "redirect:/edit_student";
+    }
+
+    //    @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
+//    public String schoolPage() {
+//        return " school/school_student_list";
+//    }
+    @RequestMapping("managerdoctor")
+    public String managerdoctor(ModelMap map, HttpSession session) {
+        if (schoolValid(map, session)) return "common/error";
+        map.put("doctors", mSchool.getDoctorList());
+        return "school/school_doctor_list";
+    }
+
+    private boolean schoolValid(ModelMap map, HttpSession session) {
+        if (mSchool == null) {
+            String userToken = (String) session.getAttribute("token");
+            Optional<User> userOptional = userRepository.findUserByToken(userToken);
+            if (!userOptional.isPresent()) {
+                map.put("message", "登陆用户不存在");
+                return true;
+            }
+            mSchool = schoolRepository.findSchoolByManagerPhoneNumber(userOptional.get().getPhoneNumber()).get();
+        }
+        return false;
+    }
+
+
+    @RequestMapping("deleteDoctor/{id}")
+    public String deleteDoctor(ModelMap map, @PathVariable int id, HttpSession session) {
+        if (schoolValid(map, session)) return "common/error";
+        Doctor doctor = new Doctor();
+        doctor.setDoctorId(id);
+        mSchool.getDoctorList().remove(doctor);
+        schoolRepository.save(mSchool);
+        map.put("message", "删除成功");
+        return "common/success";
+    }
+
+    @RequestMapping("addDoctor")
+    public String addDoctor() {
+        return "school/school_add_doctor";
+    }
+
+    @RequestMapping("school_add_doctor")
+    public String inputDoctor(ModelMap map, Doctor doctor, HttpSession session) {
+        if (schoolValid(map, session)) return "common/error";
+        Optional<Doctor> doctorOptional = doctorRepository.findDoctorByManagerName(doctor.getManagerName());
+        if (!doctorOptional.isPresent()) {
+            map.put("message", "验光师不存在");
+            return "common/error";
+        }
+        mSchool.getDoctorList().add(doctorOptional.get());
+        schoolRepository.save(mSchool);
+        map.put("message", "添加成功");
+        return "common/success";
+    }
+
+
+    @RequestMapping("managerstudent")
+    public String managerStudent() {
+
+        return "redirect:/save_student";
+    }
+
+    @RequestMapping("addStudent")
+    public String addStudent(RedirectAttributes attr) {
+        attr.addFlashAttribute("id", -1);
+        return "redirect:/edit_student";
+    }
 }

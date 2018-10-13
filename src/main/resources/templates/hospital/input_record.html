@@ -4,16 +4,14 @@
 <th:block th:include="common/header :: head"></th:block>
 <head>
     <meta charset="UTF-8">
-    <title>编辑学生</title>
+    <title>新增视力记录</title>
 </head>
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
 
 <body>
-<h1>添加/编辑学生信息</h1>
-
-<form th:action="@{/save_student}" method="post">
+<form th:action="@{/finishInputRecord}" method="post">
     <div>
         <span id="basic-addon1">全称学校名</span>
         <input id="schoolName" name="schoolName" th:value="${schoolName}" type="text" placeholder="学校名全称(必填)"

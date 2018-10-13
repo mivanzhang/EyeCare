@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="common/header :: head"></th:block>
+<head>
+    <meta charset="UTF-8">
+    <title>编辑学生</title>
+</head>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+
+<body>
+<h2>管理验光师</h2>
+
+<h3><a th:href="@{/managerstudent}">管理学生</a></h3>
+<h3><a th:href="@{/addDoctor}">添加验光师</a></h3>
+<table>
+    <thead>
+    <tr>
+        <th>机构</th>
+        <th>姓名</th>
+        <th>手机号</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="doctor: ${doctors}">
+        <td><span class="list" th:text="${doctor.hospitalName}"></span></td>
+        <td><span class="list" th:text="${doctor.managerName}"></span></td>
+        <td><span class="list" th:text="${doctor.managerPhoneNumber}"></span></td>
+        <td><span class="list"><a th:href="@{/deleteDoctor/{doctorId}(doctorId=${doctor.doctorId})}">删除</a></span></td>
+    </tr>
+    </tbody>
+</body>
+</html>
+
+

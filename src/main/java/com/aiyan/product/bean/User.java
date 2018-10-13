@@ -13,7 +13,7 @@ public class User {
     @GeneratedValue
     private int userId;
     private String userName;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String phoneNumber;
     private String weiXinId;
     @Column(nullable = false)

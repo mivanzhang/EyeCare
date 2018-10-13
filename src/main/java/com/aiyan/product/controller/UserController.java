@@ -58,8 +58,8 @@ public class UserController {
                 if (schoolOptional.isPresent()) {
                     List<Student> students = schoolOptional.get().getStudentList();
                     if (students == null || students.size() < 1) {
-                        attr.addFlashAttribute("id", -1);
-                        return "redirect:edit_student";
+//                        attr.addFlashAttribute("id", -1);
+                        return "redirect:addStudent";
                     }
                     map.put("students", students);
                     return "school/school_student_list";

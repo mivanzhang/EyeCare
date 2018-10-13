@@ -1,10 +1,15 @@
 package com.aiyan.product.bean;
 
 
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table
+@Transactional
 public class Doctor {
     @Id
     @GeneratedValue
@@ -13,14 +18,17 @@ public class Doctor {
     private String hospitalName;
     @Column(nullable = false)
     private String managerName;
-    @Column(nullable = false)
+    @Column(nullable = false,unique = true)
     private String managerPhoneNumber;
     //单位证明函
     private String authrize;
     private String doctorDocument;
     private String idCardPath;
-    //表示学校的状态
     private int status;
+
+    @ManyToMany(cascade={CascadeType.PERSIST,CascadeType.MERGE},fetch=FetchType.EAGER)
+    @JoinTable(name = "school_doctor_list", joinColumns = @JoinColumn(name = "doctor_id"), inverseJoinColumns = @JoinColumn(name = "school_id"))
+    private Set<School> schoolList;
 
     public int getDoctorId() {
         return doctorId;
@@ -84,5 +92,13 @@ public class Doctor {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public Set<School> getSchoolList() {
+        return schoolList;
+    }
+
+    public void setSchoolList(Set<School> schoolList) {
+        this.schoolList = schoolList;
     }
 }

@@ -93,7 +93,9 @@ public class HospitalController {
         return "hospital/register_step2";
     }
 
+
     @RequestMapping("/finishInputHospital")
+
     public String finishInputSchool(Doctor doctor, @RequestParam("id_card") MultipartFile idCardFile, @RequestParam("prof") MultipartFile prof) {
         // 加入一个属性，用来在模板中读取
         // return模板文件的名称，对应src/main/resources/templates/index.html
@@ -110,6 +112,16 @@ public class HospitalController {
 
         return "common/success";
     }
+
+//    @RequestMapping("/input_record")
+//    public String inputEyeRecord() {
+//        return "hospital/input_record";
+//    }
+
+//    @RequestMapping("/finishInputRecord")
+//    public String finishInputRecord() {
+//
+//    }
 
     private boolean saveUploadFile(MultipartFile prof, String path) {
         if (!prof.isEmpty()) {
@@ -135,4 +147,6 @@ public class HospitalController {
         }
         return false;
     }
+
+
 }
