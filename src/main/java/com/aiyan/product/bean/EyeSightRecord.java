@@ -9,54 +9,103 @@ public class EyeSightRecord {
     @Id
     @GeneratedValue
     private int recordId;
-    private String schoolId;
+    private int schoolId;
     @Column(nullable = false)
-    private String studentId;
+    private int studentId;
     @Column(nullable = false)
-    private String doctorId;
+    private int doctorId;
     private String date;
     private String advice;
     //瞳距
     private String IPD;
 
-    private int leftEyeId;
-    private int rightEyeId;
+    private int isWearGlass;
 
-    private String previceRecordId;
+    private int previceRecordId;
+    private int nextRecordId;
 
-    private boolean isRedGreenColourBlindness;
+    private int isRedGreenColourBlindness;
 
-    private String history;
 
-    public int getLeftEyeId() {
-        return leftEyeId;
+    //0代表正常，1代表有bug
+    private int leftweakSight;
+    //斜视
+    private int leftstrabismus;
+
+    private String leftsight;
+    private String leftsightWithGlass;
+    //球镜
+    private String leftS;
+    //柱镜
+    private String leftC;
+    //轴位
+    private String leftA;
+
+    private String leftaxiallength;
+    //角膜厚度
+    private String leftcornealThickness;
+    //        前房深度
+    private String leftchamberDepth;
+    //        晶体厚度
+    private String leftcrystalThickness;
+    //        玻璃体厚度
+    private String leftglassThickness;
+
+
+
+    //0代表正常，1代表有bug
+    private int rightweakSight;
+    //斜视
+    private int rightstrabismus;
+
+    private String rightsight;
+    private String rightsightWithGlass;
+    //球镜
+    private String rightS;
+    //柱镜
+    private String rightC;
+    //轴位
+    private String rightA;
+
+    private String rightaxiallength;
+    //角膜厚度
+    private String rightcornealThickness;
+    //        前房深度
+    private String rightchamberDepth;
+    //        晶体厚度
+    private String rightcrystalThickness;
+    //        玻璃体厚度
+    private String rightglassThickness;
+
+    public int getRecordId() {
+        return recordId;
     }
 
-    public void setLeftEyeId(int leftEyeId) {
-        this.leftEyeId = leftEyeId;
+    public void setRecordId(int recordId) {
+        this.recordId = recordId;
     }
 
-    public String getSchoolId() {
+    public int getSchoolId() {
         return schoolId;
     }
 
-    public void setSchoolId(String schoolId) {
+    public void setSchoolId(int schoolId) {
         this.schoolId = schoolId;
     }
 
-    public String getStudentId() {
+    public int getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(String studentId) {
+    public void setStudentId(int studentId) {
         this.studentId = studentId;
     }
 
-    public String getDoctorId() {
+    public int getDoctorId() {
         return doctorId;
     }
 
-    public void setDoctorId(String doctorId) {
+    public void setDoctorId(int doctorId) {
         this.doctorId = doctorId;
     }
 
@@ -84,177 +133,229 @@ public class EyeSightRecord {
         this.IPD = IPD;
     }
 
-    public String getHistory() {
-        return history;
+
+    public int getIsWearGlass() {
+        return isWearGlass;
     }
 
-    public void setHistory(String history) {
-        this.history = history;
+    public void setIsWearGlass(int isWearGlass) {
+        this.isWearGlass = isWearGlass;
     }
 
-    public int getRecordId() {
-        return recordId;
-    }
-
-    public void setRecordId(int recordId) {
-        this.recordId = recordId;
-    }
-
-    public int getRightEyeId() {
-        return rightEyeId;
-    }
-
-    public void setRightEyeId(int rightEyeId) {
-        this.rightEyeId = rightEyeId;
-    }
-
-    public String getPreviceRecordId() {
+    public int getPreviceRecordId() {
         return previceRecordId;
     }
 
-    public void setPreviceRecordId(String previceRecordId) {
+    public void setPreviceRecordId(int previceRecordId) {
         this.previceRecordId = previceRecordId;
     }
 
-    public boolean isRedGreenColourBlindness() {
+    public int getIsRedGreenColourBlindness() {
         return isRedGreenColourBlindness;
     }
 
-    public void setRedGreenColourBlindness(boolean redGreenColourBlindness) {
-        isRedGreenColourBlindness = redGreenColourBlindness;
+    public void setIsRedGreenColourBlindness(int isRedGreenColourBlindness) {
+        this.isRedGreenColourBlindness = isRedGreenColourBlindness;
     }
-    @Entity
-    @Table
-    public class Eye {
-        @Id
-        @GeneratedValue
-        private int eyeId;
-        //0代表正常，1代表有bug
-        private boolean weakSight;
-        //斜视
-        private boolean strabismus;
 
-        private String sight;
-        private String sightWithGlass;
-        //球镜
-        private String S;
-        //柱镜
-        private String C;
-        //轴位
-        private String A;
+    public int getLeftweakSight() {
+        return leftweakSight;
+    }
 
-        private String axiallength;
-        //角膜厚度
-        private String cornealThickness;
-        //        前房深度
-        private String chamberDepth;
-        //        晶体厚度
-        private String crystalThickness;
-        //        玻璃体厚度
-        private String glassThickness;
+    public void setLeftweakSight(int leftweakSight) {
+        this.leftweakSight = leftweakSight;
+    }
 
-        public boolean isWeakSight() {
-            return weakSight;
-        }
+    public int getLeftstrabismus() {
+        return leftstrabismus;
+    }
 
-        public void setWeakSight(boolean weakSight) {
-            this.weakSight = weakSight;
-        }
+    public void setLeftstrabismus(int leftstrabismus) {
+        this.leftstrabismus = leftstrabismus;
+    }
 
-        public boolean isStrabismus() {
-            return strabismus;
-        }
+    public String getLeftsight() {
+        return leftsight;
+    }
 
-        public void setStrabismus(boolean strabismus) {
-            this.strabismus = strabismus;
-        }
+    public void setLeftsight(String leftsight) {
+        this.leftsight = leftsight;
+    }
 
-        public String getSight() {
-            return sight;
-        }
+    public String getLeftsightWithGlass() {
+        return leftsightWithGlass;
+    }
 
-        public void setSight(String sight) {
-            this.sight = sight;
-        }
+    public void setLeftsightWithGlass(String leftsightWithGlass) {
+        this.leftsightWithGlass = leftsightWithGlass;
+    }
 
-        public String getSightWithGlass() {
-            return sightWithGlass;
-        }
+    public String getLeftS() {
+        return leftS;
+    }
 
-        public void setSightWithGlass(String sightWithGlass) {
-            this.sightWithGlass = sightWithGlass;
-        }
+    public void setLeftS(String leftS) {
+        this.leftS = leftS;
+    }
 
-        public String getS() {
-            return S;
-        }
+    public String getLeftC() {
+        return leftC;
+    }
 
-        public void setS(String s) {
-            S = s;
-        }
+    public void setLeftC(String leftC) {
+        this.leftC = leftC;
+    }
 
-        public String getC() {
-            return C;
-        }
+    public String getLeftA() {
+        return leftA;
+    }
 
-        public void setC(String c) {
-            C = c;
-        }
+    public void setLeftA(String leftA) {
+        this.leftA = leftA;
+    }
 
-        public String getA() {
-            return A;
-        }
+    public String getLeftaxiallength() {
+        return leftaxiallength;
+    }
 
-        public void setA(String a) {
-            A = a;
-        }
+    public void setLeftaxiallength(String leftaxiallength) {
+        this.leftaxiallength = leftaxiallength;
+    }
 
-        public String getAxiallength() {
-            return axiallength;
-        }
+    public String getLeftcornealThickness() {
+        return leftcornealThickness;
+    }
 
-        public void setAxiallength(String axiallength) {
-            this.axiallength = axiallength;
-        }
+    public void setLeftcornealThickness(String leftcornealThickness) {
+        this.leftcornealThickness = leftcornealThickness;
+    }
 
-        public String getCornealThickness() {
-            return cornealThickness;
-        }
+    public String getLeftchamberDepth() {
+        return leftchamberDepth;
+    }
 
-        public void setCornealThickness(String cornealThickness) {
-            this.cornealThickness = cornealThickness;
-        }
+    public void setLeftchamberDepth(String leftchamberDepth) {
+        this.leftchamberDepth = leftchamberDepth;
+    }
 
-        public String getChamberDepth() {
-            return chamberDepth;
-        }
+    public String getLeftcrystalThickness() {
+        return leftcrystalThickness;
+    }
 
-        public void setChamberDepth(String chamberDepth) {
-            this.chamberDepth = chamberDepth;
-        }
+    public void setLeftcrystalThickness(String leftcrystalThickness) {
+        this.leftcrystalThickness = leftcrystalThickness;
+    }
 
-        public String getCrystalThickness() {
-            return crystalThickness;
-        }
+    public String getLeftglassThickness() {
+        return leftglassThickness;
+    }
 
-        public void setCrystalThickness(String crystalThickness) {
-            this.crystalThickness = crystalThickness;
-        }
+    public void setLeftglassThickness(String leftglassThickness) {
+        this.leftglassThickness = leftglassThickness;
+    }
 
-        public String getGlassThickness() {
-            return glassThickness;
-        }
 
-        public void setGlassThickness(String glassThickness) {
-            this.glassThickness = glassThickness;
-        }
+    public int getRightstrabismus() {
+        return rightstrabismus;
+    }
 
-        public int getEyeId() {
-            return eyeId;
-        }
+    public void setRightstrabismus(int rightstrabismus) {
+        this.rightstrabismus = rightstrabismus;
+    }
 
-        public void setEyeId(int eyeId) {
-            this.eyeId = eyeId;
-        }
+    public String getRightsight() {
+        return rightsight;
+    }
+
+    public void setRightsight(String rightsight) {
+        this.rightsight = rightsight;
+    }
+
+    public String getRightsightWithGlass() {
+        return rightsightWithGlass;
+    }
+
+    public void setRightsightWithGlass(String rightsightWithGlass) {
+        this.rightsightWithGlass = rightsightWithGlass;
+    }
+
+    public String getRightS() {
+        return rightS;
+    }
+
+    public void setRightS(String rightS) {
+        this.rightS = rightS;
+    }
+
+    public String getRightC() {
+        return rightC;
+    }
+
+    public void setRightC(String rightC) {
+        this.rightC = rightC;
+    }
+
+    public String getRightA() {
+        return rightA;
+    }
+
+    public void setRightA(String rightA) {
+        this.rightA = rightA;
+    }
+
+    public String getRightaxiallength() {
+        return rightaxiallength;
+    }
+
+    public void setRightaxiallength(String rightaxiallength) {
+        this.rightaxiallength = rightaxiallength;
+    }
+
+    public String getRightcornealThickness() {
+        return rightcornealThickness;
+    }
+
+    public void setRightcornealThickness(String rightcornealThickness) {
+        this.rightcornealThickness = rightcornealThickness;
+    }
+
+    public String getRightchamberDepth() {
+        return rightchamberDepth;
+    }
+
+    public void setRightchamberDepth(String rightchamberDepth) {
+        this.rightchamberDepth = rightchamberDepth;
+    }
+
+    public String getRightcrystalThickness() {
+        return rightcrystalThickness;
+    }
+
+    public void setRightcrystalThickness(String rightcrystalThickness) {
+        this.rightcrystalThickness = rightcrystalThickness;
+    }
+
+    public String getRightglassThickness() {
+        return rightglassThickness;
+    }
+
+    public void setRightglassThickness(String rightglassThickness) {
+        this.rightglassThickness = rightglassThickness;
+    }
+
+    public int getRightweakSight() {
+        return rightweakSight;
+    }
+
+    public void setRightweakSight(int rightweakSight) {
+        this.rightweakSight = rightweakSight;
+    }
+
+    public int getNextRecordId() {
+        return nextRecordId;
+    }
+
+    public void setNextRecordId(int nextRecordId) {
+        this.nextRecordId = nextRecordId;
     }
 }

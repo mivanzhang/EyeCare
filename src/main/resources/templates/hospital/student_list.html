@@ -33,9 +33,11 @@
         <td><span class="list" th:text="${student.gradeNum}"></span></td>
         <td><span class="list" th:text="${student.classNum}"></span></td>
         <td><span class="list"><a
-                th:href="@{/edite_record/{studentId}/{schoolid}(studentId=${student.studentId},schoolid=${schoolId})}">编辑检测表</a></span></td>
+                th:href="@{/edite_record/{studentId}/{schoolid}(studentId=${student.studentId},schoolid=${schoolId})}">编辑检测表</a></span>
+        </td>
     </tr>
     </tbody>
+</table>
 </body>
 </html>
 

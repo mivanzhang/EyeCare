@@ -195,7 +195,8 @@ public class SchoolController {
 
     @Transactional
     @RequestMapping("/save_student")
-    public String commitStudent(ModelMap map, Student student, @RequestParam int sex) {
+    public String commitStudent(ModelMap map, Student student, @RequestParam int sex, HttpSession session) {
+        if (schoolValid(map, session)) return "common/error";
         map.put("student", new Student());
         student.setSex(sex == 1);
         student.setSchool(mSchool);
@@ -256,15 +257,13 @@ public class SchoolController {
     }
 
     private boolean schoolValid(ModelMap map, HttpSession session) {
-        if (mSchool == null) {
-            String userToken = (String) session.getAttribute("token");
-            Optional<User> userOptional = userRepository.findUserByToken(userToken);
-            if (!userOptional.isPresent()) {
-                map.put("message", "登陆用户不存在");
-                return true;
-            }
-            mSchool = schoolRepository.findSchoolByManagerPhoneNumber(userOptional.get().getPhoneNumber()).get();
+        String userToken = (String) session.getAttribute("token");
+        Optional<User> userOptional = userRepository.findUserByToken(userToken);
+        if (!userOptional.isPresent()) {
+            map.put("message", "登陆用户不存在");
+            return true;
         }
+        mSchool = schoolRepository.findSchoolByManagerPhoneNumber(userOptional.get().getPhoneNumber()).get();
         return false;
     }
 
@@ -306,13 +305,16 @@ public class SchoolController {
 
 
     @RequestMapping("managerstudent")
-    public String managerStudent() {
-
-        return "redirect:/save_student";
+    public String managerStudent(ModelMap map, HttpSession session) {
+        if (schoolValid(map, session)) return "common/error";
+        List<Student> students = mSchool.getStudentList();
+        map.put("students", students);
+        return "school/school_student_list";
     }
 
     @RequestMapping("addStudent")
-    public String addStudent(RedirectAttributes attr) {
+    public String addStudent(ModelMap map,RedirectAttributes attr, HttpSession session) {
+        if (schoolValid(map, session)) return "common/error";
         attr.addFlashAttribute("id", -1);
         return "redirect:/edit_student";
     }

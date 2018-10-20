@@ -1,14 +1,8 @@
 package com.aiyan.product.controller;
 
-import com.aiyan.product.bean.Doctor;
-import com.aiyan.product.bean.School;
-import com.aiyan.product.bean.Student;
-import com.aiyan.product.bean.User;
+import com.aiyan.product.bean.*;
 import com.aiyan.product.common.Constants;
-import com.aiyan.product.jpa.DoctorRepository;
-import com.aiyan.product.jpa.SchoolRepository;
-import com.aiyan.product.jpa.StudentRepository;
-import com.aiyan.product.jpa.UserRepository;
+import com.aiyan.product.jpa.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -21,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -34,6 +29,9 @@ public class HospitalController {
     protected SchoolRepository schoolRepository;
     @Autowired
     protected StudentRepository studentRepository;
+
+    @Autowired
+    protected EyeSightRecordRepository eyeSightRecordRepository;
 
     @RequestMapping("hospital_login")
     public String requestSchoolLogin(ModelMap map) {
@@ -121,15 +119,6 @@ public class HospitalController {
         return "common/success";
     }
 
-//    @RequestMapping("/input_record")
-//    public String inputEyeRecord() {
-//        return "hospital/input_record";
-//    }
-
-//    @RequestMapping("/finishInputRecord")
-//    public String finishInputRecord() {
-//
-//    }
 
     private boolean saveUploadFile(MultipartFile prof, String path) {
         if (!prof.isEmpty()) {
@@ -193,7 +182,7 @@ public class HospitalController {
     }
 
     @RequestMapping("/edite_record/{id}/{schoolId}")
-    public String editeRecord(@PathVariable int id, ModelMap map, HttpSession session, @PathVariable int  schoolId) {
+    public String editeRecord(@PathVariable int id, ModelMap map, HttpSession session, @PathVariable int schoolId) {
         if (loginValid(map, session)) return "common/error";
 
         Optional<School> schoolOptional = schoolRepository.findSchoolBySchoolId(schoolId);
@@ -201,14 +190,52 @@ public class HospitalController {
             map.put("message", "学校不存在");
             return "common/error";
         }
+
         map.put("schoolName", schoolOptional.get().getSchoolName());
-        map.put("schoolId", schoolId);
+        map.put("doctorName", mDoctor.getManagerName());
+
+
         Optional<Student> optionalStudent = studentRepository.findStudentByStudentId(id);
         if (!optionalStudent.isPresent()) {
             map.put("message", "学生不存在");
             return "common/error";
         }
+        session.setAttribute("schoolId", schoolId);
+        session.setAttribute("studentid", id);
+        map.put("student", optionalStudent.get());
+        Optional<EyeSightRecord> optionalEyeSightRecord = eyeSightRecordRepository.findEyeSightRecordByStudentId(optionalStudent.get().getStudentId());
+        if (optionalEyeSightRecord.isPresent()) {
+            map.put("record", optionalEyeSightRecord.get());
+            session.setAttribute("recordid", optionalEyeSightRecord.get().getRecordId());
+        } else {
+            map.put("record", new EyeSightRecord());
+            session.setAttribute("recordid", -1);
+        }
         map.put("student", optionalStudent.get());
         return "hospital/input_record";
+    }
+
+
+    @RequestMapping("/input_record")
+    public String inputEyeRecord() {
+        return "hospital/input_record";
+    }
+
+    @RequestMapping("/finishInputRecord")
+    public String finishInputRecord(ModelMap map, HttpSession session, EyeSightRecord eyeSightRecord) {
+        if (loginValid(map, session)) return "common/error";
+        int previceRecordId = (Integer) session.getAttribute("recordid");
+        if (previceRecordId != -1) {
+            eyeSightRecord.setPreviceRecordId(previceRecordId);
+            Optional<EyeSightRecord> eyeSightRecord1 = eyeSightRecordRepository.findEyeSightRecordByRecordId(previceRecordId);
+            eyeSightRecord1.get().setStudentId(-1);
+            eyeSightRecordRepository.save(eyeSightRecord1.get());
+        }
+        eyeSightRecord.setStudentId((Integer) session.getAttribute("studentid"));
+        eyeSightRecord.setSchoolId((Integer) session.getAttribute("schoolId"));
+        eyeSightRecord.setDoctorId((Integer) mDoctor.getDoctorId());
+        eyeSightRecordRepository.save(eyeSightRecord);
+        int schoolid = (Integer) session.getAttribute("schoolId");
+        return "redirect:/studentlist/" + schoolid;
     }
 }
