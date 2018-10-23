@@ -1,5 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+<input type="hidden" th:value="${schoolId}" id="schoolId"/>
+
+<!-- main JS libs -->
+<script src="../static/vanilla-cream-css/js/libs/modernizr.min.js"
+        th:src="@{/vanilla-cream-css/js/libs/modernizr.min.js}"></script>
+<script src="../static/vanilla-cream-css/js/libs/jquery-1.10.0.js"
+        th:src="@{/vanilla-cream-css/js/libs/jquery-1.10.0.js}"></script>
+<script src="../static/vanilla-cream-css/js/libs/jquery-ui.min.js"
+        th:src="@{/vanilla-cream-css/js/libs/jquery-ui.min.js}"></script>
+<script src="../static/vanilla-cream-css/js/libs/bootstrap.min.js"
+        th:src="@{/vanilla-cream-css/js/libs/bootstrap.min.js}"></script>
+
+<!-- Style CSS -->
+<link rel="stylesheet" href="../static/vanilla-cream-css/css/bootstrap.css"
+      th:href="@{/vanilla-cream-css/css/bootstrap.css}"/>
+<link rel="stylesheet" href="../static/vanilla-cream-css/style.css" th:href="@{/vanilla-cream-css/style.css}"/>
+<!-- scripts -->
+<script src="../static/vanilla-cream-css/js/general.js" th:src="@{/vanilla-cream-css/js/general.js}"></script>
+
 
 <th:block th:include="common/header :: head"></th:block>
 <head>
@@ -8,39 +30,74 @@
 </head>
 <body>
 <form th:action="@{/query}" method="post">
-    <div>
-        <!--/*@thymesVar id="error" type=""*/-->
-        <span id="basic-addon0">&nbsp;</span>
-        <span style="font-size: 12px;color: red" th:text="${error}" aria-describedby="basic-addon0"></span>
-        <br/>
-    </div>
-    <div>
-        <span id="basic-addon1">学校名称</span>
-        <input id="school_name" name="schoolName" type="text" placeholder="学校名称" aria-describedby="basic-addon1"/>
+    <div class="body_wrap">
+        <div class="container">
+            <table class="table table-striped table-bordered">
+                <tr>
+                    <th rowspan="5">
+                        <img src="http://fe.topitme.com/e/13/41/11315694278344113eo.jpg" alt="Big Boat" width="300"
+                             height="300">
+                    </th>
+                    <th>
+                        <span id="basic-addon1">学校名称</span>
+                    </th>
+                    <th>
+                        <input id="school_name" name="schoolName" type="text" placeholder="学校名称"
+                               aria-describedby="basic-addon1"/>
+                    </th>
+                </tr>
 
+                <tr>
+                    <th>
+                        <span id="basic-addon2">学号</span>
+                    </th>
+                    <th>
+                        <input id="studentNo" name="studentNo" type="text" placeholder="学号"
+                               aria-describedby="basic-addon2"/>
+                    </th>
+                </tr>
+
+                <tr>
+                    <th>
+                        <span id="basic-addon3">出生日期</span>
+                    </th>
+                    <th>
+                        <input id="birethday" name="birethday" type="text" placeholder="20080129"/>
+                    </th>
+                </tr>
+
+
+                <tr>
+                    <th>
+                        <span id="basic-addon2">姓名</span>
+                    </th>
+                    <th>
+                        <input id="name" name="name" type="text" placeholder="姓名" aria-describedby="basic-addon2"
+                               required/>
+                    </th>
+                </tr>
+
+                <tr>
+                    <th colspan="2">
+                        <button type="submit" style="width:190px;">开始查询</button>
+                        <p>注：正确输入【姓名】+【前三项任意一项】即可</p>
+                    </th>
+                </tr>
+
+                <tr>
+                    <th>
+                        <h3><a th:href="@{/user_login}">用户登陆</a></h3>
+                    </th>
+                    <th>
+                        <h3><a th:href="@{/school_register}">学校注册</a></h3>
+                    </th>
+                    <th>
+                        <h3><a th:href="@{/hospital_register}">验光师注册</a></h3>
+                    </th>
+                </tr>
+            </table>
+        </div>
     </div>
-    <br/>
-    <div>
-        <span id="basic-addon2">学号</span>
-        <input id="studentNo" name="studentNo" type="text" placeholder="学号" aria-describedby="basic-addon2"/>
-    </div>
-    <br/>
-    <div>
-        <span id="basic-addon3">出生日期</span>
-        <input id="birethday" name="birethday" type="text" placeholder="20080129"/>
-    </div>
-    <br/>
-    <div>
-        <span id="basic-addon2">姓名</span>
-        <input id="name" name="name" type="text" placeholder="姓名" aria-describedby="basic-addon2" required/>
-    </div>
-    <br/>
-    <button type="submit" style="width:190px;">开始查询</button>
-    <p>注：正确输入【姓名】+【前三项任意一项】即可</p>
 </form>
-<h3><a th:href="@{/user_login}">用户登陆</a></h3>
-<h3><a th:href="@{/school_register}">学校注册</a></h3>
-<h3><a th:href="@{/hospital_register}">验光师注册</a></h3>
-
 </body>
 </html>
