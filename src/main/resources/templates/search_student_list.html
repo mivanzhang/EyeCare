@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="common/header :: head"></th:block>
+<head>
+    <meta charset="UTF-8">
+    <title>学生列表</title>
+</head>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+
+<body>
+
+<table>
+    <thead>
+    <tr>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>年级</th>
+        <th>班级</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="student: ${students}">
+        <td><span class="list" th:text="${student.studentNo}"></span></td>
+        <td><span class="list" th:text="${student.name}"></span></td>
+        <td><span class="list" th:text="${student.gradeNum}"></span></td>
+        <td><span class="list" th:text="${student.classNum}"></span></td>
+        <td><span class="list"><a
+                th:href="@{/searchStudent/{studentId}(studentId=${student.studentId})}">查看</a></span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
+
+

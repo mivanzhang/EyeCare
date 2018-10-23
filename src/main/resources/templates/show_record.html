@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="common/header :: head"></th:block>
+<head>
+    <meta charset="UTF-8">
+    <title>新增视力记录</title>
+</head>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+<input type="hidden" th:value="${schoolId}" id="schoolId"/>
+
+<!-- main JS libs -->
+<script src="../../static/vanilla-cream-css/js/libs/modernizr.min.js"
+        th:src="@{/vanilla-cream-css/js/libs/modernizr.min.js}"></script>
+<script src="../../static/vanilla-cream-css/js/libs/jquery-1.10.0.js"
+        th:src="@{/vanilla-cream-css/js/libs/jquery-1.10.0.js}"></script>
+<script src="../../static/vanilla-cream-css/js/libs/jquery-ui.min.js"
+        th:src="@{/vanilla-cream-css/js/libs/jquery-ui.min.js}"></script>
+<script src="../../static/vanilla-cream-css/js/libs/bootstrap.min.js"
+        th:src="@{/vanilla-cream-css/js/libs/bootstrap.min.js}"></script>
+
+<!-- Style CSS -->
+<link rel="stylesheet" href="../../static/vanilla-cream-css/css/bootstrap.css"
+      th:href="@{/vanilla-cream-css/css/bootstrap.css}"/>
+<link rel="stylesheet" href="../../static/vanilla-cream-css/style.css" th:href="@{/vanilla-cream-css/style.css}"/>
+<!-- scripts -->
+<script src="../../static/vanilla-cream-css/js/general.js" th:src="@{/vanilla-cream-css/js/general.js}"></script>
+
+
+<body style="background-image: none;">
+
+<form th:action="@{/finishInputRecord}" method="post">
+    <div class="body_wrap">
+        <div class="container">
+            <table class="table table-striped table-bordered">
+                <tr>
+                    <th><span id="basic-addon1">全称学校名</span></th>
+                    <th colspan="2">
+                        <input id="schoolName" name="schoolName" th:value="${schoolName}" type="text"
+                               placeholder="学校名全称(必填)"
+                               aria-describedby="basic-addon2" readonly="readonly"/>
+                    </th>
+                </tr>
+                <tr>
+                    <th><span id="basic-addon2">年级</span></th>
+                    <th colspan="2">
+
+                        <input name="gradeNum" th:value="${student.gradeNum}" type="text" placeholder="三年级"
+                               aria-describedby="basic-addon2" readonly="readonly"/>
+                    </th>
+                </tr>
+                <tr>
+                    <th><span id="basic-addon3">班级</span></th>
+                    <th colspan="2">
+
+                        <input name="classNum" th:value="${student.classNum}" type="text" placeholder="一班(必填)"
+                               aria-describedby="basic-addon2" readonly="readonly"/>
+                    </th>
+                </tr>
+                <tr>
+                    <th><span id="basic-addon4">学号</span></th>
+                    <th colspan="2">
+                        <input name="studentNo" th:value="${student.studentNo}" type="text" placeholder="学号(必填)"
+                               aria-describedby="basic-addon2" readonly="readonly"/>
+                    </th>
+                </tr>
+                <tr>
+                    <th><span id="basic-addon5">姓名</span></th>
+                    <th colspan="2">
+
+                        <input name="name" th:value="${student.name}" type="text" placeholder="姓名(必填)"
+                               aria-describedby="basic-addon2" readonly="readonly"/>
+                    </th>
+                </tr>
+                <tr>
+                    <th><span id="basic-addon6">是否带眼镜</span></th>
+                    <th colspan="2">
+                        <input value="1" name="isWearGlass" th:checked="${record.isWearGlass} == 1" type="radio"
+                               aria-describedby="basic-addon2"/>是
+                        <input th:checked="${record.isWearGlass} == 0" type="radio" value="0" checked="checked"
+
+                               name="isWearGlass" aria-describedby="basic-addon2"/>否
+                    </th>
+                </tr>
+
+                <tr>
+                    <th><span>红绿色盲</span></th>
+                    <th colspan="2">
+                        <input value="1" name="isRedGreenColourBlindness"
+                               th:checked="${record.isRedGreenColourBlindness} == 1" type="radio"
+                               aria-describedby="basic-addon2"/>是
+                        <input th:checked="${record.isRedGreenColourBlindness} == 0" type="radio" value="0"
+                               checked="checked"
+                               name="isRedGreenColourBlindness" aria-describedby="basic-addon2"/>否
+                    </th>
+                </tr>
+
+                <tr th:rowspan="4">
+                    <th colspan="2">视力信息</th>
+                </tr>
+                <tr>
+                    <th>参数</th>
+                    <th>左眼</th>
+                    <th>右眼</th>
+
+                </tr>
+                <tr>
+                    <th>弱视</th>
+                    <th>
+                        <input value="1" name="leftweakSight" type="radio" th:value="${record.leftweakSight}"
+                               aria-describedby="basic-addon2"/>无
+                        <input name="leftweakSight" type="radio" value="0" checked="checked"
+                               aria-describedby="basic-addon2"/>有
+                    </th>
+                    <th>
+                        <input value="1" name="rightweakSight" type="radio"
+                               aria-describedby="basic-addon2"/>无
+                        <input name="rightweakSight" type="radio" value="0"
+                               checked="checked"/>有
+                    </th>
+                </tr>
+                <tr>
+                    <th>斜视</th>
+                    <th>
+                        <input value="1" name="leftstrabismus" type="radio"
+                               aria-describedby="basic-addon2"/>无
+                        <input type="radio" value="0" checked="checked"
+                               name="leftstrabismus" aria-describedby="basic-addon2"/>有
+                    </th>
+                    <th>
+                        <input value="1" name="rightstrabismus" type="radio"
+                               aria-describedby="basic-addon2"/>无
+                        <input type="radio" value="0" checked="checked"
+                               name="rightstrabismus" aria-describedby="basic-addon2"/>有
+                    </th>
+                </tr>
+                <tr>
+                    <th>裸眼视力</th>
+                    <th><input name="leftsight" th:value="${record.leftsight}" type="text"/></th>
+                    <th><input name="rightsight" th:value="${record.rightsight}" type="text"/></th>
+                </tr>
+                <tr>
+                    <th>戴镜视力</th>
+                    <th><input name="leftsightWithGlass" th:value="${record.leftsightWithGlass}" type="text"/></th>
+                    <th><input name="rightsightWithGlass" th:value="${record.rightsightWithGlass}" type="text"/></th>
+                </tr>
+
+                <tr>
+                    <th>球镜(S)</th>
+                    <th><input name="leftS" th:value="${record.leftS}" type="text"/></th>
+                    <th><input name="rightS" th:value="${record.leftS}" type="text"/></th>
+                </tr>
+                <tr>
+                    <th>柱镜(C)</th>
+                    <th><input name="leftC" th:value="${record.leftC}" type="text"/></th>
+                    <th><input name="rightC" th:value="${record.rightC}" type="text"/></th>
+                </tr>
+                <tr>
+                    <th>轴位(A)</th>
+                    <th><input name="leftA" th:value="${record.leftA}" type="text"/></th>
+                    <th><input name="rightA" th:value="${record.rightA}" type="text"/></th>
+                </tr>
+                <tr>
+                    <th>瞳距(PD)</th>
+                    <th colspan="2"><input name="IPD" type="text" th:value="${record.IPD}"/></th>
+                </tr>
+                <tr>
+                    <th>眼轴长度</th>
+                    <th><input name="leftaxiallength" th:value="${record.leftaxiallength}" type="text"/></th>
+                    <th><input name="rightaxiallength" th:value="${record.rightaxiallength}" type="text"/></th>
+                </tr>
+                <tr>
+                    <th>角膜厚度</th>
+                    <th><input name="leftcornealThickness" th:value="${record.leftcornealThickness}" type="text"/></th>
+                    <th><input name="rightcornealThickness" th:value="${record.rightcornealThickness}" type="text"/>
+                    </th>
+                </tr>
+
+                <tr>
+                    <th>前房深度</th>
+                    <th><input name="leftchamberDepth" th:value="${record.leftchamberDepth}" type="text"/></th>
+                    <th><input name="rightchamberDepth" th:value="${record.rightchamberDepth}" type="text"/></th>
+                </tr>
+
+                <tr>
+                    <th>晶体厚度</th>
+                    <th><input name="leftcrystalThickness" th:value="${record.leftcrystalThickness}" type="text"/></th>
+                    <th><input name="rightcrystalThickness" th:value="${record.rightcrystalThickness}" type="text"/>
+                    </th>
+                </tr>
+
+                <tr>
+                    <th>玻璃体厚度</th>
+                    <th><input name="leftglassThickness" th:value="${record.leftglassThickness}" type="text"/></th>
+                    <th><input name="rightglassThickness" th:value="${record.rightglassThickness}" type="text"/></th>
+                </tr>
+                <tr>
+                    <th>健康提示信息</th>
+                    <th colspan="2"><input name="advice" th:value="${record.advice}" type="text"/></th>
+                </tr>
+
+                <tr>
+                    <th>日期</th>
+                    <th colspan="2"><span th:value="${record.date}"></span>
+                    </th>
+                </tr>
+                <tr>
+                    <th>验光师姓名</th>
+                    <th colspan="2"><span
+                            th:text="${record.doctorName}"></span>
+                    </th>
+                </tr>
+                <tr>
+                    <th colspan="3">
+                        <a th:href="@{/}">返回首页</a>
+                    </th>
+                </tr>
+            </table>
+        </div>
+        <!--/ container -->
+    </div>
+
+
+</form>
+
+</body>
+</html>
+
+

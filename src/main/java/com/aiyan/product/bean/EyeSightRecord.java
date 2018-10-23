@@ -14,6 +14,7 @@ public class EyeSightRecord {
     private int studentId;
     @Column(nullable = false)
     private int doctorId;
+    private String doctorName;
     private String date;
     private String advice;
     //瞳距
@@ -357,5 +358,13 @@ public class EyeSightRecord {
 
     public void setNextRecordId(int nextRecordId) {
         this.nextRecordId = nextRecordId;
+    }
+
+    public String getDoctorName() {
+        return doctorName;
+    }
+
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
     }
 }
