@@ -9,28 +9,51 @@
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+<!-- main JS libs -->
+<script src="../../static/vanilla-cream-css/js/libs/modernizr.min.js"
+        th:src="@{/vanilla-cream-css/js/libs/modernizr.min.js}"></script>
+<script src="../../static/vanilla-cream-css/js/libs/jquery-1.10.0.js"
+        th:src="@{/vanilla-cream-css/js/libs/jquery-1.10.0.js}"></script>
+<script src="../../static/vanilla-cream-css/js/libs/jquery-ui.min.js"
+        th:src="@{/vanilla-cream-css/js/libs/jquery-ui.min.js}"></script>
+<script src="../../static/vanilla-cream-css/js/libs/bootstrap.min.js"
+        th:src="@{/vanilla-cream-css/js/libs/bootstrap.min.js}"></script>
 
-<body>
-<h2>管理验光师</h2>
+<!-- Style CSS -->
+<link rel="stylesheet" href="../../static/vanilla-cream-css/css/bootstrap.css"
+      th:href="@{/vanilla-cream-css/css/bootstrap.css}"/>
+<link rel="stylesheet" href="../../static/vanilla-cream-css/style.css" th:href="@{/vanilla-cream-css/style.css}"/>
+<!-- scripts -->
+<script src="../../static/vanilla-cream-css/js/general.js" th:src="@{/vanilla-cream-css/js/general.js}"></script>
+
+
+<body style="background-image: none;text-align:center">
 
 <h3><a th:href="@{/managerstudent}">管理学生</a></h3>
 <h3><a th:href="@{/addDoctor}">添加验光师</a></h3>
-<table>
-    <thead>
-    <tr>
-        <th>机构</th>
-        <th>姓名</th>
-        <th>手机号</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="doctor: ${doctors}">
-        <td><span class="list" th:text="${doctor.hospitalName}"></span></td>
-        <td><span class="list" th:text="${doctor.managerName}"></span></td>
-        <td><span class="list" th:text="${doctor.managerPhoneNumber}"></span></td>
-        <td><span class="list"><a th:href="@{/deleteDoctor/{doctorId}(doctorId=${doctor.doctorId})}">删除</a></span></td>
-    </tr>
-    </tbody>
+<div class="body_wrap">
+    <div class="container">
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>机构</th>
+                <th>姓名</th>
+                <th>手机号</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="doctor: ${doctors}">
+                <td><span class="list" th:text="${doctor.hospitalName}"></span></td>
+                <td><span class="list" th:text="${doctor.managerName}"></span></td>
+                <td><span class="list" th:text="${doctor.managerPhoneNumber}"></span></td>
+                <td><span class="list"><a
+                        th:href="@{/deleteDoctor/{doctorId}(doctorId=${doctor.doctorId})}">删除</a></span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>
 

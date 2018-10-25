@@ -9,25 +9,53 @@
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+<!-- main JS libs -->
+<script src="../../static/vanilla-cream-css/js/libs/modernizr.min.js"
+        th:src="@{/vanilla-cream-css/js/libs/modernizr.min.js}"></script>
+<script src="../../static/vanilla-cream-css/js/libs/jquery-1.10.0.js"
+        th:src="@{/vanilla-cream-css/js/libs/jquery-1.10.0.js}"></script>
+<script src="../../static/vanilla-cream-css/js/libs/jquery-ui.min.js"
+        th:src="@{/vanilla-cream-css/js/libs/jquery-ui.min.js}"></script>
+<script src="../../static/vanilla-cream-css/js/libs/bootstrap.min.js"
+        th:src="@{/vanilla-cream-css/js/libs/bootstrap.min.js}"></script>
 
-<body>
-<h2>查找验光师</h2>
+<!-- Style CSS -->
+<link rel="stylesheet" href="../../static/vanilla-cream-css/css/bootstrap.css"
+      th:href="@{/vanilla-cream-css/css/bootstrap.css}"/>
+<link rel="stylesheet" href="../../static/vanilla-cream-css/style.css" th:href="@{/vanilla-cream-css/style.css}"/>
+<!-- scripts -->
+<script src="../../static/vanilla-cream-css/js/general.js" th:src="@{/vanilla-cream-css/js/general.js}"></script>
+
+
+<h2 style="text-align:center">查找验光师</h2>
+<body style="background-image: none;text-align:center">
 <form th:action="@{/school_add_doctor}" method="post">
-    <div>
-        <span id="basic-addon3">手机号</span>
-        <input name="managerPhoneNumber"  type="text" placeholder="手机号(选填)"
-               aria-describedby="basic-addon2"/>
-    </div>
-    <br/>
-    <div>
-        <span id="basic-addon4">姓名</span>
-        <input name="managerName"  type="text" placeholder="姓名(必填)"
-               aria-describedby="basic-addon2" required/>
-    </div>
-    <br/>
-    <button type="submit" style="width:190px;" name="action" value="login">确定</button>
-</form>
+    <div class="body_wrap">
+        <div class="container">
+            <table class="table table-striped table-bordered">
+                <tr>
 
+                    <th id="basic-addon3">手机号</th>
+                    <th>
+                        <input name="managerPhoneNumber" type="text" placeholder="手机号(选填)"
+                               aria-describedby="basic-addon2"/>
+                    </th>
+                </tr>
+                <tr>
+                    <th id="basic-addon4">姓名</th>
+                    <th>
+                        <input name="managerName" type="text" placeholder="姓名(必填)"
+                               aria-describedby="basic-addon2" required/></th>
+                </tr>
+                <tr>
+                    <th colspan="2">
+                        <button type="submit" style="width:190px;" name="action" value="login">确定</button>
+                    </th>
+                </tr>
+            </table>
+        </div>
+    </div>
+</form>
 </body>
 </html>
 

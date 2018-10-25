@@ -5,39 +5,78 @@
     <title>医疗机构注册</title>
     <link rel="stylesheet" type="text/css" href="/css/common.css"/>
 </head>
-<body>
-<h1>医疗机构注册</h1>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+<input type="hidden" th:value="${schoolId}" id="schoolId"/>
+
+<!-- main JS libs -->
+<script src="../../static/vanilla-cream-css/js/libs/modernizr.min.js"
+        th:src="@{/vanilla-cream-css/js/libs/modernizr.min.js}"></script>
+<script src="../../static/vanilla-cream-css/js/libs/jquery-1.10.0.js"
+        th:src="@{/vanilla-cream-css/js/libs/jquery-1.10.0.js}"></script>
+<script src="../../static/vanilla-cream-css/js/libs/jquery-ui.min.js"
+        th:src="@{/vanilla-cream-css/js/libs/jquery-ui.min.js}"></script>
+<script src="../../static/vanilla-cream-css/js/libs/bootstrap.min.js"
+        th:src="@{/vanilla-cream-css/js/libs/bootstrap.min.js}"></script>
+
+<!-- Style CSS -->
+<link rel="stylesheet" href="../../static/vanilla-cream-css/css/bootstrap.css"
+      th:href="@{/vanilla-cream-css/css/bootstrap.css}"/>
+<link rel="stylesheet" href="../../static/vanilla-cream-css/style.css" th:href="@{/vanilla-cream-css/style.css}"/>
+<!-- scripts -->
+<script src="../../static/vanilla-cream-css/js/general.js" th:src="@{/vanilla-cream-css/js/general.js}"></script>
+
+<body style="background-image: none;">
+<h1 style="text-align:center">医疗机构注册</h1>
 <form th:action="@{/savehospital}" method="post">
+    <div class="body_wrap">
+        <div class="container">
+            <table class="table table-striped table-bordered">
+                <tr>
+                    <th id="basic-addon1">医疗机构全称</th>
+                    <th id="hospitalName" name="hospitalName" type="text" placeholder="清华第三附属医院"
+                        th:value="${hospitalName}"
+                        aria-describedby="basic-addon1"></th>
 
-    <div>
-        <span id="basic-addon1">医疗机构全称</span>
-        <input id="hospitalName" name="hospitalName" type="text" placeholder="清华第三附属医院" th:value="${hospitalName}"
-               aria-describedby="basic-addon1"/>
+                </tr>
+                <br/>
 
+                <tr>
+                    <th id="basic-addon2">真实姓名</th>
+                    <th>
+                        <input id="mangerName" name="managerName" type="text" th:value="${managerName}"
+                               placeholder="张飞天"
+                               aria-describedby="basic-addon2"/>
+                    </th>
+                </tr>
+                <br/>
+                <tr>
+                    <th id="basic-addon5">绑定手机号</th>
+                    <th>
+                        <input id="managerPhoneNumber" name="managerPhoneNumber" th:value="${managerPhoneNumber}"
+                               type="tel"
+                               placeholder="188888888888"
+                               aria-describedby="basic-addon2"/>
+                        <button type="submit" style="width:190px;" name="action" th:text="${sendSMS}">获取验证码</button>
+                    </th>
+                </tr>
+                <br/>
+                <tr>
+                    <th id="basic-addon4">验证码</th>
+                    <th>
+                        <input id="verify_code" name="verifyCode" type="text" placeholder="验证码"
+                               aria-describedby="basic-addon2"/>
+                    </th>
+                </tr>
+                <tr>
+                    <th colspan="2">
+                        <button type="submit" style="width:190px;" name="action" value="login">申请验证（进入一下步）</button>
+                    </th>
+                </tr>
+            </table>
+        </div>
     </div>
-    <br/>
-
-    <div>
-        <span id="basic-addon2">真实姓名</span>
-        <input id="mangerName" name="managerName" type="text" th:value="${managerName}" placeholder="张飞天"
-               aria-describedby="basic-addon2"/>
-    </div>
-    <br/>
-    <div>
-        <span id="basic-addon5">绑定手机号</span>
-        <input id="managerPhoneNumber" name="managerPhoneNumber" th:value="${managerPhoneNumber}" type="tel"
-               placeholder="188888888888"
-               aria-describedby="basic-addon2"/>
-        <button type="submit" style="width:190px;" name="action" th:text="${sendSMS}">获取验证码</button>
-    </div>
-    <br/>
-    <div>
-        <span id="basic-addon4">验证码</span>
-        <input id="verify_code" name="verifyCode" type="text" placeholder="验证码" aria-describedby="basic-addon2"/>
-    </div>
-    <br/>
-    <button type="submit" style="width:190px;" name="action" value="login">申请验证（进入一下步）</button>
-
 </form>
 </body>
 </html>
