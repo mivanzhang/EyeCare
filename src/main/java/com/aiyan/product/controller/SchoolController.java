@@ -109,7 +109,7 @@ public class SchoolController {
         }
         // 加入一个属性，用来在模板中读取
         // return模板文件的名称，对应src/main/resources/templates/index.html
-        school.setStatus(Constants.SCHOOL_STATUS_STEP1);
+        school.setStatus(Constants.STATUS_STEP1);
         mSchool = schoolRepository.save(school);
         map.addAttribute("schoolName", school.getSchoolName());
         map.addAttribute("managerPhoneNumber", school.getManagerPhoneNumber());
@@ -126,7 +126,7 @@ public class SchoolController {
 //    public String verifyschool(ModelMap map, School school) {
 //        // 加入一个属性，用来在模板中读取
 //        // return模板文件的名称，对应src/main/resources/templates/index.html
-//        school.setStatus(Constants.SCHOOL_STATUS_JUDGING);
+//        school.setStatus(Constants.STATUS_JUDGING);
 //        schoolRepository.save(school);
 //        return "school/school_register_step2";
 //    }
@@ -144,7 +144,7 @@ public class SchoolController {
 
         mSchool.setAuthrize(authrizePath);
         mSchool.setIdCardPath(idCardPath);
-        mSchool.setStatus(Constants.SCHOOL_STATUS_JUDGING);
+        mSchool.setStatus(Constants.STATUS_JUDGING);
         mSchool.setSchoolName(school.getSchoolName());
         mSchool.setManagerPhoneNumber(school.getManagerPhoneNumber());
         mSchool.setManagerName(school.getManagerName());

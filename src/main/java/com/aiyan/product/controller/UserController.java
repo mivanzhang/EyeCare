@@ -35,7 +35,7 @@ public class UserController {
     public String userRegister(ModelMap map, User user, HttpSession session, RedirectAttributes attr) {
         // 加入一个属性，用来在模板中读取
         // return模板文件的名称，对应src/main/resources/templates/index.html
-//        school.setStatus(Constants.SCHOOL_STATUS_JUDGING);
+//        school.setStatus(Constants.STATUS_JUDGING);
 //        schoolRepository.save(school);
         Optional<User> userOptional = userRepository.findUserByPhoneNumber(user.getPhoneNumber());
         if (!userOptional.isPresent()) {
@@ -49,6 +49,8 @@ public class UserController {
             case Constants.USER_ROLE_COMMON_USER:
 
                 break;
+            case Constants.USER_ROLE_SUPER_MANGER:
+                return "redirect:admin_home";
             case Constants.USER_ROLE_DOCTOR:
 
                 return "redirect:/school_list";

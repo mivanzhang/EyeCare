@@ -15,7 +15,6 @@ import javax.servlet.http.HttpSession;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -90,7 +89,7 @@ public class HospitalController {
             userRepository.save(user);
         }
         // return模板文件的名称，对应src/main/resources/templates/index.html
-        doctor.setStatus(Constants.SCHOOL_STATUS_STEP1);
+        doctor.setStatus(Constants.STATUS_STEP1);
         mDoctor = doctorRepository.save(doctor);
         map.addAttribute("hospitalName", doctor.getHospitalName());
         map.addAttribute("managerPhoneNumber", doctor.getManagerPhoneNumber());
@@ -111,7 +110,7 @@ public class HospitalController {
 
         String authrizePath = Constants.DIRECTORY + mDoctor.getManagerPhoneNumber() + "/prof.png";
         if (saveUploadFile(prof, authrizePath)) return "common/fail";
-        mDoctor.setStatus(Constants.SCHOOL_STATUS_JUDGING);
+        mDoctor.setStatus(Constants.STATUS_JUDGING);
         mDoctor.setAuthrize(authrizePath);
         mDoctor.setDoctorDocument(idCardPath);
         doctorRepository.save(mDoctor);
