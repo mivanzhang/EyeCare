@@ -28,8 +28,12 @@
     <title>爱眼课堂</title>
 </head>
 <h1 style="text-align:center">爱眼课堂</h1>
+<div style="text-align: right;margin-right: 100">
+<a th:href="@{/logout}" style="text-align: right;  text-decoration: underline;" th:text="${name}"></a>
+</div>
 <body style="background-image: none;">
 <form th:action="@{/query}" method="post">
+
     <div class="body_wrap">
         <div class="container">
             <table class="table table-striped table-bordered">

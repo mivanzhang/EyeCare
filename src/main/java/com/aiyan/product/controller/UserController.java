@@ -26,9 +26,56 @@ public class UserController {
     protected SchoolRepository schoolRepository;
 
     @RequestMapping("/register")
-    public String requestRegister(ModelMap map) {
+    public String requestRegister(ModelMap map, HttpSession session) {
         // 加入一个属性，用来在模板中读取
+        Optional<User> optionalUser = loginValid(session);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            return getNextPage(user, map);
+        }
         return "register";
+    }
+
+
+    private String getNextPage(User user, ModelMap map) {
+        switch (user.getRole()) {
+            case Constants.USER_ROLE_COMMON_USER:
+
+                break;
+            case Constants.USER_ROLE_SUPER_MANGER:
+                return "redirect:admin_home";
+            case Constants.USER_ROLE_DOCTOR:
+                return "redirect:/school_list";
+
+            case Constants.USER_ROLE_SCHOOL_MANAGER:
+                map.put("user", user);
+                Optional<School> schoolOptional = schoolRepository.findSchoolByManagerPhoneNumber(user.getPhoneNumber());
+                if (schoolOptional.isPresent()) {
+                    School school = schoolOptional.get();
+                    if (school.getStatus() == Constants.STATUS_STEP1) {
+                        map.addAttribute("schoolName", school.getSchoolName());
+                        map.addAttribute("managerPhoneNumber", school.getManagerPhoneNumber());
+                        map.addAttribute("managerName", school.getManagerName());
+                        map.addAttribute("sendSMS", "获取验证码");
+                        return "school/school_register_step2";
+                    } else if (schoolOptional.get().getStatus() == Constants.STATUS_JUDGING) {
+                        map.put("message", "注册成功，等待审核，快速审核电话：" + Constants.USER_ROLE_SUPER_MANGER_PHONE);
+                        return "common/success";
+                    }
+
+                    List<Student> students = schoolOptional.get().getStudentList();
+                    if (students == null || students.size() < 1) {
+//                        attr.addFlashAttribute("id", -1);
+                        return "redirect:addStudent";
+                    }
+                    map.put("students", students);
+                    return "school/school_student_list";
+                }
+                return "user_register";
+            default:
+                break;
+        }
+        return "common/success";
     }
 
     @RequestMapping("/user_register")
@@ -45,35 +92,21 @@ public class UserController {
             user = userOptional.get();
         }
         session.setAttribute("token", user.getToken());
-        switch (user.getRole()) {
-            case Constants.USER_ROLE_COMMON_USER:
-
-                break;
-            case Constants.USER_ROLE_SUPER_MANGER:
-                return "redirect:admin_home";
-            case Constants.USER_ROLE_DOCTOR:
-
-                return "redirect:/school_list";
-
-            case Constants.USER_ROLE_SCHOOL_MANAGER:
-                map.put("user", user);
-                Optional<School> schoolOptional = schoolRepository.findSchoolByManagerPhoneNumber(user.getPhoneNumber());
-                if (schoolOptional.isPresent()) {
-                    List<Student> students = schoolOptional.get().getStudentList();
-                    if (students == null || students.size() < 1) {
-//                        attr.addFlashAttribute("id", -1);
-                        return "redirect:addStudent";
-                    }
-                    map.put("students", students);
-                    return "school/school_student_list";
-                }
-                return "user_register";
-            default:
-                break;
-
-        }
-        return "common/success";
+        return getNextPage(user, map);
     }
 
+    private Optional<User> loginValid(HttpSession session) {
+        String userToken = (String) session.getAttribute("token");
+        Optional<User> userOptional = userRepository.findUserByToken(userToken);
+        return userOptional;
+    }
+
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(HttpSession session) {
+        session.removeAttribute("token");
+        session.invalidate();
+        return "index";
+    }
 
 }

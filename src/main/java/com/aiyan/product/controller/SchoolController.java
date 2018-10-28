@@ -73,7 +73,6 @@ public class SchoolController {
     }
 
     @RequestMapping(value = "/saveschool", method = RequestMethod.POST)
-
     public String saveSchool(ModelMap map, School school, @RequestParam String action, @RequestParam String verifyCode) {
 
         Optional optionalSchool = schoolRepository.findSchoolByManagerPhoneNumber(school.getManagerPhoneNumber());
@@ -135,10 +134,10 @@ public class SchoolController {
     @RequestMapping("/finishInputSchool")
     public String finishInputSchool(ModelMap map, School school, @RequestParam String action,
                                     @RequestParam("id_card") MultipartFile idCardFile, @RequestParam("prof") MultipartFile prof) {
-        String idCardPath = Constants.DIRECTORY + school.getManagerPhoneNumber() + "/idCardFile.png";
+        String idCardPath = "images/" + school.getManagerPhoneNumber() + "/idCardFile.png";
         if (saveUploadFile(idCardFile, idCardPath)) return "common/fail";
 
-        String authrizePath = Constants.DIRECTORY + school.getManagerPhoneNumber() + "/prof.png";
+        String authrizePath = "images/"+ school.getManagerPhoneNumber() + "/prof.png";
         if (saveUploadFile(prof, authrizePath)) return "common/fail";
 
 
@@ -263,7 +262,23 @@ public class SchoolController {
             map.put("message", "登陆用户不存在");
             return true;
         }
-        mSchool = schoolRepository.findSchoolByManagerPhoneNumber(userOptional.get().getPhoneNumber()).get();
+        Optional<School> optionalSchool = schoolRepository.findSchoolByManagerPhoneNumber(userOptional.get().getPhoneNumber());
+
+        if (optionalSchool.isPresent()) {
+            mSchool = optionalSchool.get();
+        } else {
+            map.put("message", "学校不存在");
+            return true;
+        }
+
+        if (mSchool.getStatus() == Constants.STATUS_STEP1) {
+            map.put("message", "等待审核，快速审核电话：" + Constants.USER_ROLE_SUPER_MANGER_PHONE);
+            return true;
+        } else if (mSchool.getStatus() == Constants.STATUS_JUDGING) {
+            map.put("message", "等待审核，快速审核电话：" + Constants.USER_ROLE_SUPER_MANGER_PHONE);
+            return true;
+        }
+
         return false;
     }
 
@@ -313,7 +328,7 @@ public class SchoolController {
     }
 
     @RequestMapping("addStudent")
-    public String addStudent(ModelMap map,RedirectAttributes attr, HttpSession session) {
+    public String addStudent(ModelMap map, RedirectAttributes attr, HttpSession session) {
         if (schoolValid(map, session)) return "common/error";
         attr.addFlashAttribute("id", -1);
         return "redirect:/edit_student";

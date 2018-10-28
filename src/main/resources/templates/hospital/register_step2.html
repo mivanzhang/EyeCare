@@ -28,7 +28,7 @@
 <script src="../../static/vanilla-cream-css/js/general.js" th:src="@{/vanilla-cream-css/js/general.js}"></script>
 
 <body style="background-image: none;">
-
+<h1 style="text-align:center">医疗机构注册</h1>
 <form th:action="@{/finishInputHospital}" method="post" enctype="multipart/form-data">
     <div class="body_wrap">
         <div class="container">
@@ -69,15 +69,25 @@
                         <span id="basic-addon3">身份证照片</span>
                     </td>
                     <td>
-                        <input type="file" name="id_card"/><br/><br/>
+                        <input type="file" name="id_card" required/>
                     </td>
                 </tr>
+
+                <tr>
+                    <td>
+                        <span id="basic-addon38">医疗证书</span>
+                    </td>
+                    <td>
+                        <input type="file" name="doctorid" required/>
+                    </td>
+                </tr>
+
                 <tr>
                     <td>
                         <span id="basic-addon4">学校证明函</span>
                     </td>
                     <td>
-                        <input type="file" name="prof"/>
+                        <input type="file" name="prof" required/>
                     </td>
                 </tr>
                 <tr>

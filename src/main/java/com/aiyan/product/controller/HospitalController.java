@@ -4,17 +4,19 @@ import com.aiyan.product.bean.*;
 import com.aiyan.product.common.Constants;
 import com.aiyan.product.jpa.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.nio.file.Paths;
 import java.util.Optional;
 
 @Controller
@@ -28,6 +30,10 @@ public class HospitalController {
     protected SchoolRepository schoolRepository;
     @Autowired
     protected StudentRepository studentRepository;
+
+    @Autowired
+    protected ResourceLoader resourceLoader;
+
 
     @Autowired
     protected EyeSightRecordRepository eyeSightRecordRepository;
@@ -101,20 +107,25 @@ public class HospitalController {
 
     @RequestMapping("/finishInputHospital")
 
-    public String finishInputSchool(Doctor doctor, @RequestParam("id_card") MultipartFile idCardFile, @RequestParam("prof") MultipartFile prof) {
+    public String finishInputSchool(ModelMap map, Doctor doctor, HttpServletRequest request, @RequestParam("id_card") MultipartFile idCardFile, @RequestParam("prof") MultipartFile prof
+            , @RequestParam("doctorid") MultipartFile doctorDocument) {
         // 加入一个属性，用来在模板中读取
         // return模板文件的名称，对应src/main/resources/templates/index.html
-
-        String idCardPath = Constants.DIRECTORY + mDoctor.getManagerPhoneNumber() + "/idCardFile.png";
+        String idCardPath = "images/" + mDoctor.getManagerPhoneNumber() + "/idCardFile.png";
         if (saveUploadFile(idCardFile, idCardPath)) return "common/fail";
 
-        String authrizePath = Constants.DIRECTORY + mDoctor.getManagerPhoneNumber() + "/prof.png";
+        String authrizePath = "images/"+mDoctor.getManagerPhoneNumber() + "/prof.png";
         if (saveUploadFile(prof, authrizePath)) return "common/fail";
+
+        String doctorDocumentPath = "images/"+ mDoctor.getManagerPhoneNumber() + "/doctorDocument.png";
+        if (saveUploadFile(doctorDocument, doctorDocumentPath)) return "common/fail";
+
         mDoctor.setStatus(Constants.STATUS_JUDGING);
         mDoctor.setAuthrize(authrizePath);
-        mDoctor.setDoctorDocument(idCardPath);
+        mDoctor.setIdCardPath(idCardPath);
+        mDoctor.setDoctorDocument(doctorDocumentPath);
         doctorRepository.save(mDoctor);
-
+        map.put("message", "等待审核，快速审核电话：" + Constants.USER_ROLE_SUPER_MANGER_PHONE);
         return "common/success";
     }
 
@@ -154,9 +165,19 @@ public class HospitalController {
     private boolean loginValid(ModelMap map, HttpSession session) {
         String userToken = (String) session.getAttribute("token");
         Optional<User> userOptional = userRepository.findUserByToken(userToken);
-        if (mDoctor == null) {
-            mDoctor = doctorRepository.findDoctorByManagerPhoneNumber(userOptional.get().getPhoneNumber()).get();
+        Optional<Doctor> optionalDoctor = doctorRepository.findDoctorByManagerPhoneNumber(userOptional.get().getPhoneNumber());
+
+        if (optionalDoctor.isPresent()) {
+            mDoctor = optionalDoctor.get();
+            map.put("message", "验光师不存在");
+            return true;
         }
+
+        if (mDoctor.getStatus() <= Constants.STATUS_JUDGING) {
+            map.put("message", "验光师还在审核，暂时无法录入信息，快速审核电话：" + Constants.USER_ROLE_SUPER_MANGER_PHONE);
+            return true;
+        }
+
         if (!userOptional.isPresent() || mDoctor == null) {
             map.put("message", "登陆用户不存在");
             return true;
@@ -237,4 +258,5 @@ public class HospitalController {
         int schoolid = (Integer) session.getAttribute("schoolId");
         return "redirect:/studentlist/" + schoolid;
     }
+
 }
