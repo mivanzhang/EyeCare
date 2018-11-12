@@ -35,6 +35,7 @@
             <tr>
                 <th>学号</th>
                 <th>姓名</th>
+                <th>学校</th>
                 <th>年级</th>
                 <th>班级</th>
                 <th>操作</th>
@@ -44,6 +45,7 @@
             <tr th:each="student: ${students}">
                 <td><span class="list" th:text="${student.studentNo}"></span></td>
                 <td><span class="list" th:text="${student.name}"></span></td>
+                <td><span class="list" th:text="${student.school.schoolName}"></span></td>
                 <td><span class="list" th:text="${student.gradeNum}"></span></td>
                 <td><span class="list" th:text="${student.classNum}"></span></td>
                 <td><span class="list"><a

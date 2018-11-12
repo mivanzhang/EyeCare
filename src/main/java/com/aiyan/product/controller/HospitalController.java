@@ -114,10 +114,10 @@ public class HospitalController {
         String idCardPath = "images/" + mDoctor.getManagerPhoneNumber() + "/idCardFile.png";
         if (saveUploadFile(idCardFile, idCardPath)) return "common/fail";
 
-        String authrizePath = "images/"+mDoctor.getManagerPhoneNumber() + "/prof.png";
+        String authrizePath = "images/" + mDoctor.getManagerPhoneNumber() + "/prof.png";
         if (saveUploadFile(prof, authrizePath)) return "common/fail";
 
-        String doctorDocumentPath = "images/"+ mDoctor.getManagerPhoneNumber() + "/doctorDocument.png";
+        String doctorDocumentPath = "images/" + mDoctor.getManagerPhoneNumber() + "/doctorDocument.png";
         if (saveUploadFile(doctorDocument, doctorDocumentPath)) return "common/fail";
 
         mDoctor.setStatus(Constants.STATUS_JUDGING);
@@ -169,6 +169,8 @@ public class HospitalController {
 
         if (optionalDoctor.isPresent()) {
             mDoctor = optionalDoctor.get();
+
+        } else {
             map.put("message", "验光师不存在");
             return true;
         }
