@@ -58,24 +58,24 @@ public class HomePageController {
     @RequestMapping(value = "/query", method = RequestMethod.POST)
     public String query(ModelMap map, @ModelAttribute(value = "query") Query query, HttpSession session) {
         String queryTime = (String) session.getAttribute(Constants.QUERYTIME);
-        if (queryTime == null || queryTime.length() < 1) {
-            session.setAttribute(Constants.QUERYTIME, "1");
-            session.setAttribute(Constants.TIME, System.currentTimeMillis());
-        } else {
-            int times = 0;
-            try {
-                times = Integer.parseInt(queryTime);
-            } catch (Exception e) {
-
-            }
-            if (times <= Constants.MAX_QUERY_TIME) {
-                map.put("message", "当日查询次数超过最大，如需查询请联系" + Constants.USER_ROLE_SUPER_MANGER_PHONE);
-                return "common/error";
-            } else {
-                session.setAttribute(Constants.QUERYTIME, times++);
-                session.setMaxInactiveInterval(24 * 60 * 60 * 2);
-            }
-        }
+//        if (queryTime == null || queryTime.length() < 1) {
+//            session.setAttribute(Constants.QUERYTIME, "1");
+//            session.setAttribute(Constants.TIME, System.currentTimeMillis());
+//        } else {
+//            int times = 0;
+//            try {
+//                times = Integer.parseInt(queryTime);
+//            } catch (Exception e) {
+//
+//            }
+//            if (times <= Constants.MAX_QUERY_TIME) {
+//                map.put("message", "当日查询次数超过最大，如需查询请联系" + Constants.USER_ROLE_SUPER_MANGER_PHONE);
+//                return "common/error";
+//            } else {
+//                session.setAttribute(Constants.QUERYTIME, times++);
+//                session.setMaxInactiveInterval(24 * 60 * 60 * 2);
+//            }
+//        }
         // 加入一个属性，用来在模板中读取
         // return模板文件的名称，对应src/main/resources/templates/index.html
         Optional<List<Student>> studentOptional = Optional.empty();
@@ -107,7 +107,7 @@ public class HomePageController {
                 return "common/error";
             }
             map.put("record", eyeSightRecordOptional.get());
-            map.put("student", studentOptional.get());
+            map.put("student", studentOptional.get().get(0));
             return "show_record";
         } else {
             map.put("students", studentList);
