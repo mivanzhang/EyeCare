@@ -12,6 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
@@ -33,6 +34,7 @@ public class UserController {
             User user = optionalUser.get();
             return getNextPage(user, map);
         }
+        map.addAttribute("sendSMS", "发送短信");
         return "register";
     }
 
@@ -79,11 +81,18 @@ public class UserController {
     }
 
     @RequestMapping("/user_register")
-    public String userRegister(ModelMap map, User user, HttpSession session, RedirectAttributes attr) {
+    public String userRegister(ModelMap map, User user, HttpSession session, @RequestParam String action) {
         // 加入一个属性，用来在模板中读取
         // return模板文件的名称，对应src/main/resources/templates/index.html
 //        school.setStatus(Constants.STATUS_JUDGING);
 //        schoolRepository.save(school);
+        if ("".equals(action) || action.length() < 1) {
+            //发送验证码
+            map.addAttribute("phoneNumber", user.getPhoneNumber());
+            map.addAttribute("sendSMS", "已发送");
+            return "register";
+        }
+
         Optional<User> userOptional = userRepository.findUserByPhoneNumber(user.getPhoneNumber());
         if (!userOptional.isPresent()) {
             user.setRole(Constants.USER_ROLE_COMMON_USER);

@@ -36,9 +36,9 @@
                         <span id="basic-addon3">手机号</span>
                     </th>
                     <th colspan="2">
-                        <input id="phoneNumber" name="phoneNumber" type="tel" placeholder="188888888888"
+                        <input id="phoneNumber" name="phoneNumber" th:value="${phoneNumber}" type="tel" placeholder="188888888888"
                                aria-describedby="basic-addon2" required/>
-                        <button type="button" style="width:190px;" method="get" onclick="" th:onclick="@{/getSmsCode}">
+                        <button  style="width:190px;" type="submit"  name="action" th:text="${sendSMS}" onclick="" th:onclick="@{/getSmsCode}">
                             获取验证码
                         </button>
                     </th>
@@ -54,7 +54,7 @@
                 </tr>
                 <tr>
                     <th colspan="2">
-                        <button type="submit" style="width:190px;">登陆</button>
+                        <button type="submit" style="width:190px;" name="action" value="step1">登陆</button>
                     </th>
                 </tr>
             </table>

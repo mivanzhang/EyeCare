@@ -14,7 +14,8 @@ public class Constants {
     //系统的最高管理员
     public static final int USER_ROLE_SUPER_MANGER = 9;
     public static final String USER_ROLE_SUPER_MANGER_PHONE = "18518461933";
-    public static final String DIRECTORY = "file:" + "/Users/mivanzhang/Desktop/tmp/";
+    public static final String DIRECTORY = "/Users/mivanzhang/Desktop/tmp/";
+    public static final String PATH = "file:" + DIRECTORY;
 
     public static final String QUERYTIME = "querytimes";
     public static final String TIME = "time";

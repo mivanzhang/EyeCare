@@ -17,6 +17,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.file.Paths;
+import java.util.Date;
 import java.util.Optional;
 
 @Controller
@@ -112,13 +113,13 @@ public class HospitalController {
         // 加入一个属性，用来在模板中读取
         // return模板文件的名称，对应src/main/resources/templates/index.html
         String idCardPath = "images/" + mDoctor.getManagerPhoneNumber() + "/idCardFile.png";
-        if (saveUploadFile(idCardFile, idCardPath)) return "common/fail";
+        if (saveUploadFile(idCardFile, Constants.DIRECTORY + mDoctor.getManagerPhoneNumber() + "/idCardFile.png")) return "common/fail";
 
         String authrizePath = "images/" + mDoctor.getManagerPhoneNumber() + "/prof.png";
-        if (saveUploadFile(prof, authrizePath)) return "common/fail";
+        if (saveUploadFile(prof, Constants.DIRECTORY + mDoctor.getManagerPhoneNumber() + "/prof.png")) return "common/fail";
 
         String doctorDocumentPath = "images/" + mDoctor.getManagerPhoneNumber() + "/doctorDocument.png";
-        if (saveUploadFile(doctorDocument, doctorDocumentPath)) return "common/fail";
+        if (saveUploadFile(doctorDocument, Constants.DIRECTORY +  mDoctor.getManagerPhoneNumber() + "/doctorDocument.png")) return "common/fail";
 
         mDoctor.setStatus(Constants.STATUS_JUDGING);
         mDoctor.setAuthrize(authrizePath);
@@ -256,6 +257,9 @@ public class HospitalController {
         eyeSightRecord.setStudentId((Integer) session.getAttribute("studentid"));
         eyeSightRecord.setSchoolId((Integer) session.getAttribute("schoolId"));
         eyeSightRecord.setDoctorId((Integer) mDoctor.getDoctorId());
+        eyeSightRecord.setDoctorName(mDoctor.getManagerName());
+//        eyeSightRecord.setDate(Dates.format(new java.util.Date().getTime(), 'yyyy-MM-dd HH:mm:ss'));
+        eyeSightRecord.setDate(new Date().toString());
         eyeSightRecordRepository.save(eyeSightRecord);
         int schoolid = (Integer) session.getAttribute("schoolId");
         return "redirect:/studentlist/" + schoolid;

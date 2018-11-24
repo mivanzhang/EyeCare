@@ -9,6 +9,7 @@ import com.aiyan.product.jpa.DoctorRepository;
 import com.aiyan.product.jpa.SchoolRepository;
 import com.aiyan.product.jpa.StudentRepository;
 import com.aiyan.product.jpa.UserRepository;
+import org.apache.tomcat.util.bcel.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -135,10 +136,10 @@ public class SchoolController {
     public String finishInputSchool(ModelMap map, School school, @RequestParam String action,
                                     @RequestParam("id_card") MultipartFile idCardFile, @RequestParam("prof") MultipartFile prof) {
         String idCardPath = "images/" + school.getManagerPhoneNumber() + "/idCardFile.png";
-        if (saveUploadFile(idCardFile, idCardPath)) return "common/fail";
+        if (saveUploadFile(idCardFile, Constants.DIRECTORY+school.getManagerPhoneNumber() + "/idCardFile.png")) return "common/fail";
 
         String authrizePath = "images/"+ school.getManagerPhoneNumber() + "/prof.png";
-        if (saveUploadFile(prof, authrizePath)) return "common/fail";
+        if (saveUploadFile(prof,  Constants.DIRECTORY+school.getManagerPhoneNumber() + "/prof.png")) return "common/fail";
 
 
         mSchool.setAuthrize(authrizePath);

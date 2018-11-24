@@ -35,13 +35,14 @@ public class AdminController {
         List<School> schoolList = new ArrayList<>();
         Optional<List<School>> judgingStatusSchoolList = schoolRepository.findSchoolByStatus(Constants.STATUS_JUDGING);
         Optional<List<School>> step1StatusSchoolList = schoolRepository.findSchoolByStatus(Constants.STATUS_STEP1);
-        if (judgingStatusSchoolList.isPresent()) {
-            schoolList.addAll(judgingStatusSchoolList.get());
-        }
-        if (step1StatusSchoolList.isPresent()) {
-            schoolList.addAll(step1StatusSchoolList.get());
-        }
+        judgingStatusSchoolList.ifPresent(schoolList::addAll);
+        step1StatusSchoolList.ifPresent(schoolList::addAll);
         map.put("schools", schoolList);
+
+        List<School> passedschoolList = new ArrayList<>();
+        Optional<List<School>> successStatusSchoolList = schoolRepository.findSchoolByStatus(Constants.STATUS_SUCCESS);
+        successStatusSchoolList.ifPresent(passedschoolList::addAll);
+        map.put("approved_schools", passedschoolList);
 
         List<Doctor> doctorList = new ArrayList<>();
         Optional<List<Doctor>> judgingStatusDoctorList = doctorRepository.findDoctorByStatus(Constants.STATUS_JUDGING);
@@ -53,6 +54,13 @@ public class AdminController {
             doctorList.addAll(step1StatusDoctorList.get());
         }
         map.put("doctors", doctorList);
+
+
+        List<Doctor> passedDoctorList = new ArrayList<>();
+        Optional<List<Doctor>> successStatuDoctorList = doctorRepository.findDoctorByStatus(Constants.STATUS_SUCCESS);
+        successStatuDoctorList.ifPresent(passedDoctorList::addAll);
+        map.put("approved_doctors", passedDoctorList);
+
         return "admin/admin_home";
     }
 
