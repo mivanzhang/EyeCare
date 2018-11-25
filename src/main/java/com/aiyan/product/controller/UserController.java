@@ -40,6 +40,9 @@ public class UserController {
 
 
     private String getNextPage(User user, ModelMap map) {
+        if (user.getPhoneNumber().equals(Constants.USER_ROLE_SUPER_MANGER_PHONE)) {
+            return "redirect:admin_home";
+        }
         switch (user.getRole()) {
             case Constants.USER_ROLE_COMMON_USER:
 
@@ -81,17 +84,26 @@ public class UserController {
     }
 
     @RequestMapping("/user_register")
-    public String userRegister(ModelMap map, User user, HttpSession session, @RequestParam String action) {
+    public String userRegister(ModelMap map, User user, HttpSession session, @RequestParam String action, String verifyCode) {
         // 加入一个属性，用来在模板中读取
         // return模板文件的名称，对应src/main/resources/templates/index.html
 //        school.setStatus(Constants.STATUS_JUDGING);
 //        schoolRepository.save(school);
         if ("".equals(action) || action.length() < 1) {
             //发送验证码
+            SchoolController.sendCode(user.getPhoneNumber());
             map.addAttribute("phoneNumber", user.getPhoneNumber());
             map.addAttribute("sendSMS", "已发送");
             return "register";
         }
+
+        //校验验证码
+        if (!SchoolController.checkCode(user.getPhoneNumber(), verifyCode)) {
+            map.addAttribute("phoneNumber", user.getPhoneNumber());
+            map.addAttribute("sendSMS", "验证码错误，重试");
+            return "register";
+        }
+
 
         Optional<User> userOptional = userRepository.findUserByPhoneNumber(user.getPhoneNumber());
         if (!userOptional.isPresent()) {

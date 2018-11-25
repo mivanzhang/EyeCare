@@ -80,7 +80,6 @@
                         <input value="1" name="isWearGlass" th:checked="${record.isWearGlass} == 1" type="radio"
                                aria-describedby="basic-addon2"/>是
                         <input th:checked="${record.isWearGlass} == 0" type="radio" value="0" checked="checked"
-
                                name="isWearGlass" aria-describedby="basic-addon2"/>否
                     </th>
                 </tr>
@@ -109,30 +108,29 @@
                 <tr>
                     <th>弱视</th>
                     <th>
-                        <input value="1" name="leftweakSight" type="radio"
+                        <input value="1" name="leftweakSight" type="radio"checked="checked"
                                aria-describedby="basic-addon2"/>无
-                        <input name="leftweakSight" type="radio" value="0" checked="checked"
+                        <input name="leftweakSight" type="radio" value="0"
                                aria-describedby="basic-addon2"/>有
                     </th>
                     <th>
-                        <input value="1" name="rightweakSight" type="radio"
+                        <input value="1" name="rightweakSight" type="radio"checked="checked"
                                aria-describedby="basic-addon2"/>无
-                        <input name="rightweakSight" type="radio" value="0"
-                               checked="checked"/>有
+                        <input name="rightweakSight" type="radio" value="0"/>有
                     </th>
                 </tr>
                 <tr>
                     <th>斜视</th>
                     <th>
-                        <input value="1" name="leftstrabismus" type="radio"
+                        <input value="1" name="leftstrabismus" type="radio" checked="checked"
                                aria-describedby="basic-addon2"/>无
-                        <input type="radio" value="0" checked="checked"
+                        <input type="radio" value="0"
                                name="leftstrabismus" aria-describedby="basic-addon2"/>有
                     </th>
                     <th>
-                        <input value="1" name="rightstrabismus" type="radio"
+                        <input value="1" name="rightstrabismus" type="radio" checked="checked"
                                aria-describedby="basic-addon2"/>无
-                        <input type="radio" value="0" checked="checked"
+                        <input type="radio" value="0"
                                name="rightstrabismus" aria-describedby="basic-addon2"/>有
                     </th>
                 </tr>

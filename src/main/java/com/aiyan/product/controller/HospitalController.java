@@ -77,16 +77,27 @@ public class HospitalController {
     }
 
     @RequestMapping("/savehospital")
-    public String saveSchool(ModelMap map, Doctor doctor, @RequestParam String action) {
+    public String saveSchool(ModelMap map, Doctor doctor, @RequestParam String action, String verifyCode) {
         // 加入一个属性，用来在模板中读取
         if ("".equals(action) || action.length() < 1) {
             //发送验证码
+            SchoolController.sendCode(doctor.getManagerPhoneNumber());
             map.addAttribute("hospitalName", doctor.getHospitalName());
             map.addAttribute("managerPhoneNumber", doctor.getManagerPhoneNumber());
             map.addAttribute("sendSMS", "已发送");
             map.addAttribute("managerName", doctor.getManagerName());
             return "hospital/register_step1";
         }
+
+        //校验验证码
+        if (!SchoolController.checkCode(doctor.getManagerPhoneNumber(),verifyCode)) {
+            map.addAttribute("hospitalName", doctor.getHospitalName());
+            map.addAttribute("managerPhoneNumber", doctor.getManagerPhoneNumber());
+            map.addAttribute("sendSMS", "验证码错误，重试");
+            map.addAttribute("managerName", doctor.getManagerName());
+            return "hospital/register_step1";
+        }
+
         if (userRepository.findUserByPhoneNumber(doctor.getManagerPhoneNumber()).isPresent()) {
 
         } else {

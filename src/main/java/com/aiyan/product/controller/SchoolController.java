@@ -74,7 +74,7 @@ public class SchoolController {
     }
 
     @RequestMapping(value = "/saveschool", method = RequestMethod.POST)
-    public String saveSchool(ModelMap map, School school, @RequestParam String action, @RequestParam String verifyCode) {
+    public String saveSchool(ModelMap map, School school, @RequestParam String action, String verifyCode) {
 
         Optional optionalSchool = schoolRepository.findSchoolByManagerPhoneNumber(school.getManagerPhoneNumber());
         if (optionalSchool.isPresent()) {
@@ -84,6 +84,7 @@ public class SchoolController {
 
         if ("".equals(action) || action.length() < 1) {
             //发送验证码
+            sendCode(school.getManagerPhoneNumber());
             map.addAttribute("schoolName", school.getSchoolName());
             map.addAttribute("managerPhoneNumber", school.getManagerPhoneNumber());
             map.addAttribute("sendSMS", "已发送");
@@ -91,7 +92,7 @@ public class SchoolController {
             return "school/school_register_step1";
         }
         //校验验证码
-        if (!checkCode(verifyCode)) {
+        if (!checkCode(school.getManagerPhoneNumber(),verifyCode)) {
             map.addAttribute("schoolName", school.getSchoolName());
             map.addAttribute("managerPhoneNumber", school.getManagerPhoneNumber());
             map.addAttribute("sendSMS", "验证码错误，重试");
@@ -118,7 +119,12 @@ public class SchoolController {
         return "school/school_register_step2";
     }
 
-    private boolean checkCode(String verifyCode) {
+    public static boolean sendCode(String phoneNumber) {
+
+        return true;
+    }
+
+    public static boolean checkCode(String phoneNumber,String verifyCode) {
         return true;
     }
 
