@@ -51,7 +51,7 @@
                 <td><span class="list" th:text="${student.name}"></span></td>
                 <td><span class="list" th:text="${student.gradeNum}"></span></td>
                 <td><span class="list" th:text="${student.classNum}"></span></td>
-                <td><span class="list" th:text="${student.sex == 1} ? '男': '女'"></span></td>
+                <td><span class="list" th:text="${student.sex} ? '男': '女'"></span></td>
                 <!-- <td><span class="list" th:text="${student.isWearGlass == 1} ? '男': '女'"></span>-->
                 <td><span class="list" th:text="${{student.birthDay}}"></span></td>
                 <td><span class="list" th:text="${student.weight}"></span></td>

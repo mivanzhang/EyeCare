@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -92,7 +93,7 @@ public class SchoolController {
             return "school/school_register_step1";
         }
         //校验验证码
-        if (!checkCode(school.getManagerPhoneNumber(),verifyCode)) {
+        if (!checkCode(school.getManagerPhoneNumber(), verifyCode)) {
             map.addAttribute("schoolName", school.getSchoolName());
             map.addAttribute("managerPhoneNumber", school.getManagerPhoneNumber());
             map.addAttribute("sendSMS", "验证码错误，重试");
@@ -124,7 +125,7 @@ public class SchoolController {
         return true;
     }
 
-    public static boolean checkCode(String phoneNumber,String verifyCode) {
+    public static boolean checkCode(String phoneNumber, String verifyCode) {
         return true;
     }
 
@@ -142,10 +143,12 @@ public class SchoolController {
     public String finishInputSchool(ModelMap map, School school, @RequestParam String action,
                                     @RequestParam("id_card") MultipartFile idCardFile, @RequestParam("prof") MultipartFile prof) {
         String idCardPath = "images/" + school.getManagerPhoneNumber() + "/idCardFile.png";
-        if (saveUploadFile(idCardFile, Constants.DIRECTORY+school.getManagerPhoneNumber() + "/idCardFile.png")) return "common/fail";
+        if (saveUploadFile(idCardFile, Constants.DIRECTORY + school.getManagerPhoneNumber() + "/idCardFile.png"))
+            return "common/fail";
 
-        String authrizePath = "images/"+ school.getManagerPhoneNumber() + "/prof.png";
-        if (saveUploadFile(prof,  Constants.DIRECTORY+school.getManagerPhoneNumber() + "/prof.png")) return "common/fail";
+        String authrizePath = "images/" + school.getManagerPhoneNumber() + "/prof.png";
+        if (saveUploadFile(prof, Constants.DIRECTORY + school.getManagerPhoneNumber() + "/prof.png"))
+            return "common/fail";
 
 
         mSchool.setAuthrize(authrizePath);
@@ -206,8 +209,14 @@ public class SchoolController {
         map.put("student", new Student());
         student.setSex(sex == 1);
         student.setSchool(mSchool);
+        Optional<List<Student>> optionalStudents = studentRepository.findStudentBySchoolAndStudentNo(mSchool, student.getStudentNo());
+        if (optionalStudents.isPresent() && optionalStudents.get().size() > 0) {
+            student.setStudentId(optionalStudents.get().get(0).getStudentId());
+        }
         studentRepository.save(student);
-        List<Student> students = mSchool.getStudentList();
+        Optional<List<Student>> studentOptional = studentRepository.findStudentBySchool(mSchool);
+
+        List<Student> students = studentOptional.isPresent() ? studentOptional.get() : new ArrayList<>();
         map.put("students", students);
         return "school/school_student_list";
     }

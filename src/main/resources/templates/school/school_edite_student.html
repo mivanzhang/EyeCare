@@ -73,9 +73,9 @@
                 <tr>
                     <th id="basic-addon6">性别</th>
                     <th>
-                        <input value="1" name="sex" th:checked="${student.sex} == 1" type="radio"
-                               aria-describedby="basic-addon2"/>男
-                        <input th:checked="${student.sex} == 0" type="radio" value="0"
+                        <input value="1" name="sex" th:checked="${student.sex}==true" type="radio"
+                               aria-describedby="basic-addon2" checked="checked"/>男
+                        <input th:checked="${student.sex} == false" type="radio" value="0"
                                name="sex" aria-describedby="basic-addon2"/>女
                     </th>
                 </tr>
