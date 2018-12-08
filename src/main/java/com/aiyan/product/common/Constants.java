@@ -15,7 +15,7 @@ public class Constants {
     public static final int USER_ROLE_SUPER_MANGER = 9;
     public static final String USER_ROLE_SUPER_MANGER_PHONE = "18518461933";
     public static final String USER_ROLE_SUPER_MANGER_PHONE_2 = "18518461933";
-    public static final String DIRECTORY = "/love-eye";
+    public static final String DIRECTORY = "/love-eye/";
     public static final String PATH = "file:" + DIRECTORY;
 
     public static final String QUERYTIME = "querytimes";
