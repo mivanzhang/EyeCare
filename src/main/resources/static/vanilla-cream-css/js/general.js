@@ -308,10 +308,10 @@ function imageSize() {
             carouselHeight = $('.carousel-inner.id'+i+' .item').height();
             ratio = carouselWidth/carouselHeight;
 
-            images_in_carousel = $('.carousel-inner.id'+i+' .item img').length;
+            images_in_carousel = $('.carousel-inner.id'+i+' .item index').length;
 
             for(var j = 1; j <= images_in_carousel; j++){
-                this_image = $('.carousel-inner.id'+i+' .item img').eq(j-1);
+                this_image = $('.carousel-inner.id'+i+' .item index').eq(j-1);
                 imgWidth = this_image.naturalWidth();
                 imgHeight = this_image.naturalHeight();
                 imgRatio = imgWidth/imgHeight;

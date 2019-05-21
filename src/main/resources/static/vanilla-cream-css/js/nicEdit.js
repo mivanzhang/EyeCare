@@ -1537,7 +1537,7 @@ var nicBBCode = bkClass.extend({
 		rp(/<ul>(.*?)<\/ul>/gi,"[list]$1[/list]");
 		rp(/<li>(.*?)<\/li>/gi,"[*]$1[/*]");
 		rp(/<ol>(.*?)<\/ol>/gi,"[list=1]$1[/list]");
-		rp(/<img.*?src="(.*?)".*?>/gi,"[img]$1[/img]");
+		rp(/<img.*?src="(.*?)".*?>/gi,"[index]$1[/index]");
 		rp(/<a.*?href="(.*?)".*?>(.*?)<\/a>/gi,"[url=$1]$2[/url]");
 		rp(/<br.*?>/gi,"\n");
 		rp(/<.*?>.*?<\/.*?>/gi,"");
@@ -1556,7 +1556,7 @@ var nicBBCode = bkClass.extend({
 		rp(/\[list\](.*?)\[\/list\]/gi,"<ul>$1</ul>");
 		rp(/\[list=1\](.*?)\[\/list\]/gi,"<ol>$1</ol>");
 		rp(/\[\*\](.*?)\[\/\*\]/gi,"<li>$1</li>");
-		rp(/\[img\](.*?)\[\/img\]/gi,"<img src=\"$1\" />");
+		rp(/\[img\](.*?)\[\/img\]/gi,"<index src=\"$1\" />");
 		rp(/\[url=(.*?)\](.*?)\[\/url\]/gi,"<a href=\"$1\">$2</a>");
 		rp(/\n/gi,"<br />");
 		//rp(/\[.*?\](.*?)\[\/.*?\]/gi,"$1");
