@@ -1,0 +1,698 @@
+*{
+	padding: 0;
+	margin: 0;
+
+}
+a{
+	text-decoration: none;
+	color:black;
+}
+
+body{
+	background: none;
+}
+
+/*标题导航栏*/
+
+.head_wrapper{
+	position: fixed;
+	border-bottom: 2px solid red;
+	height: 50px;
+	width:100%;
+	overflow: hidden;
+	background: white;
+	z-index: +10;
+}
+
+.index_logo{
+	position: absolute;
+	/*border: 1px solid red;*/
+	height:60px;
+	width:500px;
+	z-index: +11;
+}
+
+
+.head_logo img{
+	position: absolute;
+	left:80px;
+	top:6px;
+
+}
+
+.head_title{
+	position: absolute;
+	left:220px;
+	top:20px;
+	border-left:1px solid black;
+	font-size: 16px;
+	padding: 2px;
+	padding-left: 22px;
+
+}
+.head_title:hover{
+	color:blue;
+}
+
+.head_bar{
+	position: absolute;
+	top:-3px;
+	left:66%;
+	/*border: 2px solid black;*/
+	height: 60px;
+/*	width: 400px;*/
+/*	border-radius: 20px;*/
+	
+	font-size: 14px;
+	text-align: center;
+	line-height: 60px;
+/*	background: white;*/
+	
+}
+.head_bar a:hover{
+	color: blue;
+}
+
+.head_bar a{
+	/*border: 1px solid red;*/
+	width:100px;
+	height: 20px;
+	margin-left: 20px;
+
+	
+}
+
+
+
+/*监测系统*/
+
+#jcxt{
+	position: absolute;
+	top: 50px;
+	width: 100%;
+	height:1239px;
+}
+
+
+
+.jcxt_banner{
+	position: absolute;
+	top:2px;
+	width: 100%;
+	height: 626px;
+	background: rgba(0,255,0,0.3);
+}
+
+
+.wx_ewm {
+	position:absolute;
+	top:418px;
+	left:238px;
+	border:1.2px solid white;
+	width:124px;
+	height:124px;
+	background-color: white;
+	text-align: center;
+	border-radius: 10px;
+	z-index: 0;
+}
+
+.wx_ewm img{
+	border-radius: 10px;
+}
+
+.wx_cx{
+	/*color: white;*/
+	position: absolute;
+	top:545px;
+	left:253px;
+}
+
+.form_login{
+	position:absolute;
+	top:80px;
+	left:110px;
+	border:2px dashed red;
+	width:380px;
+	height:320px;
+	border-radius: 16px;
+	padding: 22px;
+	color:black;
+	
+}
+
+form p{
+	text-align: center;
+	
+}
+
+.form_login span{
+	font-size: 11px;
+	line-height: 20px;
+	text-align: center;
+
+}
+
+.reg_school,
+.reg_hospital{
+	position: absolute;
+	top:355px;
+	left:712px;
+	background-color: yellow;
+	border: 1.5px solid white;
+	width: 166px;
+	height: 66px;
+	border-radius: 12px;
+	text-align: center;
+	font-size: 15px;
+	padding: 5px;
+	line-height: 26px;
+
+}
+.reg_school a:hover,
+.reg_hospital a:hover{
+	color:blue;
+}
+
+.reg_hospital{
+	left: 950px;
+}
+
+.b_font{
+	position: absolute;
+	top:68px;
+	left:560px;
+}
+
+.b_font2{
+	position: absolute;
+	top:422px;
+	left:850px;
+}
+
+
+.outside_html{
+	position: absolute;
+	top:628px;
+	background: rgba(0,255,0,0.15);
+	width: 100%;
+	height:612px;
+}
+
+.index_notice{
+	position: absolute;
+	top:18px;
+	left:120px;
+	width: 80%;
+	height:33px;
+	border: 1px solid green;
+	border-radius: 20px;
+	line-height: 33px;
+	font-size: 14px;
+	color: black;
+	text-align: center;
+}
+
+/*帮助窗口*/
+.index_convention{
+	position: absolute;
+	top:18px;
+	width: 100%;
+	height: 195px;
+}
+
+.con_one,
+.con_two,
+.con_three,
+.con_four{
+	border: 10px ridge rgba(0,255,0,0.6);
+	width: 238px;
+	height:120px;
+	position: absolute;
+	top:52px;
+	margin-left: 82px;
+	border-radius:20px;
+	background: rgba(0,255,0,0.3);
+	text-align: center;
+
+}
+.con_two{
+	left:320px;
+}
+.con_three{
+	left:640px;
+}
+.con_four{
+	left:960px;
+}
+
+.con_one span,
+.con_two span,
+.con_three span,
+.con_four span{
+	line-height: 20px;
+}
+
+
+/*help*/
+.con_one a,
+.con_two a,
+.con_three a,
+.con_four a{
+	position: absolute;
+	right: 15px;
+	bottom: 10px;
+	border: 0.6px solid rgba(0,255,0,0.8);
+	padding-top: 3px;
+	padding-bottom: 6px;
+	padding-left: 8px;
+	padding-right: 8px;
+	border-radius: 6px;
+
+}
+
+.index_convention a:hover{
+	background: yellow;
+}
+
+.aykt_html,
+.aym_html{
+	position:absolute;
+	top:282px;
+	left:182px;
+	width:466px;
+	height:262px;
+	/*border: 1px solid red;*/
+	
+	
+}
+.aym_html{
+	left: 726px;
+}
+
+.aykt_html img,
+.aym_html img{
+	position: absolute;
+	top:66px;
+}
+
+.aykt_html div img,
+.aym_html div img{
+	position: absolute;
+	top: 0px;
+	left: 160px;
+	border-left: 1px solid green;
+	border-radius: 50px;
+	width: 280px;
+	height: 220px;
+
+}
+
+.aykt_html span,
+.aym_html span{
+	position: absolute;
+	top:128px;
+	left: 50px;
+	color: green;
+
+}
+
+
+
+
+
+
+/*爱眼课堂*/
+/*#aykt{
+	position: absolute;
+	top: 882px;
+	
+}
+
+.aykt_outside{
+	position: absolute;
+	top:12px;
+	left: 1080px;
+	width: 300px;
+	height: 30px;
+	line-height: 30px;
+}
+.aykt_outside a:hover{
+	color:green;
+}
+
+.banner{
+	position: absolute;
+	top:58px;
+	width: 100%;
+	height: 388px;
+	background: rgba(0,255,0,0.3);
+
+}
+
+.b_png5,
+.b_png6{
+	position: absolute;
+	top:66px;
+	left: 128px;
+	border: 1px solid red;
+	height: 100px;
+	border-radius: 12px;
+	background: white;
+	padding-right: 16px;
+}
+.b_png6{
+	top:220px;
+}
+.b_png8{
+	position: absolute;
+	top: 80px;
+	left: 666px;
+	height: 200px;
+}
+
+
+.wz1{
+	position: absolute;
+	top:486px;
+	left:420px;
+	width: 500px;
+}
+
+.index_picture{
+	position: absolute;
+	top:580px;
+	width: 100%;
+	height:288px;
+}
+
+.picture1,
+.picture2,
+.picture3,
+.picture4{
+	position: absolute;
+	top: 26px;
+	left: 30px;
+	width: 300px;
+	height: 238px;
+	border: 2px solid white;
+	border-radius: 10px;
+	overflow: hidden;
+
+}
+.picture2{
+	left: 360px;	
+}
+.picture3{
+	left: 690px;	
+}
+.picture4{
+	left: 1020px;
+}
+*/
+
+
+/*爱眼猫*/
+/*#aym{
+	position: absolute;
+	top: 1764px;
+}
+
+.aym_pc{
+	position: absolute;
+	border: 1px solid white;
+	height: 420px;
+	width: 100%;
+	top:60px;
+	background: rgba(255,255,255,0.68);
+}
+.p201{
+	position: absolute;
+	top: 88px;
+	left: 20px;
+	width: 600px;
+}
+
+.p_aym1{
+	position: absolute;
+	top:120px;
+	left: 666px;
+	width: 666px;
+
+}
+.p_aym2{
+	position: absolute;
+	top:26px;
+	left: 1000px;
+	width: 260px;
+}
+.p_aym3{
+	position: absolute;
+	top:200px;
+	left: 668px;
+	width: 580px;
+}
+.p_aym4{
+	position: absolute;
+	top:338px;
+	left: 820px;
+	width: 280px;
+}
+.p_aym5{
+	position: absolute;
+	top:18px;
+	left: 568px;
+	width: 228px;
+}
+.p_aym6{
+	position: absolute;
+	top:350px;
+	left: 160px;
+	width: 380px;
+}
+
+
+.aym_product{
+	position: absolute;
+	top:480px;
+	width: 100%;
+	height: 800px;
+	background: rgba(0,255,0,0.2);
+}
+
+.mask1,
+.mask2{
+	position:absolute;
+	top:30px;
+	width:680px;
+	height:320px;
+	
+}
+
+.mask2{
+	left:680px;
+}
+
+.pr202,
+.pr203{
+	position: absolute;
+	top: 36px;
+	left: 30px;
+	width: 320px;
+	border-radius: 80px;
+}
+
+.pr204,
+.pr206{
+	position: absolute;
+	top:36px;
+	left:350px;
+	width: 300px;
+}
+
+.mask3{
+	position: absolute;
+	top:420px;
+	width: 100%;
+	height: 320px;
+
+
+}
+
+.pr201{
+	position: absolute;
+	top:30px;
+	left: 158px;
+	width: 460px;
+	border-radius: 80px;
+}
+
+.pr207{
+	position: absolute;
+	top:30px;
+	left: 620px;
+	width: 380px;
+}
+
+
+
+.pr209{
+	position: absolute;
+	top:-70px;
+	left: 460px;
+	width: 500px;
+}
+
+.mask1 p,
+.mask2 p,
+.mask3 p{
+	position: absolute;
+	top:188px;
+	left: 380px;
+	
+	width: 220px;
+	height: 30px;
+	color: green;
+	
+	line-height: 26px;
+	text-align: center;
+}
+.mask3 p{
+	left: 660px;
+}
+
+.mask1 span,
+.mask2 span,
+.mask3 span{
+	position: absolute;
+	top:220px;
+	left: 400px;
+	border: 2px solid yellow;
+	width: 180px;
+	height: 30px;
+	border-radius: 10px;
+	background: yellow;
+	line-height: 26px;
+	text-align: center;
+}
+
+
+.mask3 span{
+	left: 680px;
+}
+
+.mask1 strong,
+.mask2 strong,
+.mask3 strong{
+	font-size: 16px;
+	color: red;
+}
+
+.jingdong,
+.suning,
+.taobao,
+.pinduoduo{
+	position: absolute;
+	top:275px;
+	left: 690px;
+}
+.suning{
+	left:770px;
+}
+.taobao{
+	left:730px;
+}
+.pinduoduo{
+	left: 810px;
+}
+.mask3 a:hover{
+	color: green;
+}
+*/
+
+
+
+/*联系我们*/
+#lxwm{
+	position: absolute;
+	top:1290px;
+	width: 100%;
+	height:200px;
+	border-top:1px solid red;
+	
+}
+
+.slogan{
+	position: absolute;
+	top:10px;
+	left: 50px;
+/*	border: 1px solid black;*/
+	width: 500px;
+	height: 166px;
+}
+
+.slogan_1,
+.slogan_2,
+.slogan_3,
+.slogan_4,
+.slogan_5{
+	position: absolute;
+	top:30px;
+	left: 20px;
+	width: 260px;
+}
+.slogan_2{
+	top: 60px;
+	left: 60px;
+}
+.slogan_3{
+	top:90px;
+	left: 100px;
+}
+.slogan_4{
+	top:120px;
+	left: 140px;
+}
+.slogan_5{
+	top:120px;
+	left: 260px;
+}
+
+
+.lx_pr{
+	position:absolute;
+	top:20px;
+	left:500px;
+	border-left: 1px dashed green;
+	border-right: 1px dashed green;
+	width: 380px;
+	height: 150px;
+	text-align: center;
+	line-height: 20px;
+}
+
+.pr2618{
+	/*position: absolute;*/
+	width: 100px;
+	border-radius: 5px;
+}
+
+.team{
+	position: absolute;
+	top:60px;
+	left: 888px;
+	/*border: 1px solid black;*/
+	width: 420px;
+	height: 100px;
+	text-align: center;
+	line-height: 22px;
+}
+
+
+
+
+
+
+
+
+

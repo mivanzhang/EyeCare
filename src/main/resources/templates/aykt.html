@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+
+<!-- main JS libs -->
+<script src="../static/vanilla-cream-css/js/libs/modernizr.min.js"
+        th:src="@{/vanilla-cream-css/js/libs/modernizr.min.js}"></script>
+<script src="../static/vanilla-cream-css/js/libs/jquery-1.10.0.js"
+        th:src="@{/vanilla-cream-css/js/libs/jquery-1.10.0.js}"></script>
+<script src="../static/vanilla-cream-css/js/libs/jquery-ui.min.js"
+        th:src="@{/vanilla-cream-css/js/libs/jquery-ui.min.js}"></script>
+<script src="../static/vanilla-cream-css/js/libs/bootstrap.min.js"
+        th:src="@{/vanilla-cream-css/js/libs/bootstrap.min.js}"></script>
+
+<!-- Style CSS -->
+<link rel="stylesheet" href="../static/vanilla-cream-css/css/bootstrap.css"
+      th:href="@{/vanilla-cream-css/css/bootstrap.css}"/>
+<link rel="stylesheet" href="../static/vanilla-cream-css/style.css" th:href="@{/vanilla-cream-css/style.css}"/>
+<!-- scripts -->
+<script src="../static/vanilla-cream-css/js/general.js" th:src="@{/vanilla-cream-css/js/general.js}"></script>
+
+
+<th:block th:include="common/header :: head"></th:block>
+
+
+
+<head>
+    <meta charset="UTF-8">
+     <meta content="IE=Edge">
+    <title>爱眼课堂·给孩子一个看得见的未来！</title>
+
+    <meta name="robots" content="all">
+    <meta name="keywords" content="爱眼课堂，爱眼课堂·青少年近视预防监测系统，爱眼课堂·学生护眼知识教育开拓者">
+    <meta name="description" content="爱眼课堂是一家专门为3-18岁青少年提供近视预防解决方案的团队，是最早进行学生护眼知识教育防控近视的开拓者，依托互联网、人工智能以及大数据分析，结合临床医师实际经验，努力开拓青少年近视防控领域新天地，目前以为部分学校提供教学以及学生视力监控服务，我们正努力为更多的孩子提供呵护……">
+
+    <link rel="stylesheet" href="../static/vanilla-cream-css/css/aykt.css" th:href="@{/vanilla-cream-css/css/aykt.css}"/>
+</head>
+
+<body>
+
+    <div class="head_wrapper">
+
+    	<div class="index_logo">
+                <a href="#" class="head_logo">
+                    <img height="46px" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/aykt-logo.png"></a>
+                <a href="#" class="head_title">
+                <span>学生护眼知识教育开拓者</span>
+                </a>
+    	</div>
+
+        <div class="head_bar"> 
+            <a href="index.html">监测系统</a>
+            <a href="aykt.html">爱眼课堂</a>
+            <a href="aym.html">爱眼猫</a>
+            <a href="#lxwm">联系我们</a>
+        </div>
+
+    </div>
+
+
+
+    <!-- 爱眼课堂 -->
+    <div id="aykt">
+
+
+
+          
+
+       <!--  横幅 -->
+        <div class="banner">
+                <div class="aykt_outside">
+                    <a href="#">课程咨询、预约试听、了解更多...</a>
+                </div>
+
+                <img class="b_png5" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/5.png">
+                <img class="b_png6" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/6.png">
+                <img class="b_png8" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/8.png">
+        </div>
+
+        <div class="banner2">
+
+            <img class="wz1" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/wz1.png">
+
+            <div class="index_picture">
+
+                <div class="picture1"><img src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/10.jpg"></div>
+                <div class="picture2"><img src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/11.jpg"></div>
+                <div class="picture3"><img src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/12.jpg"></div>
+                <div class="picture4"><img src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/13.jpg"></div>
+              
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+
+    <!-- 联系我们 -->
+    <div id="lxwm">
+
+
+
+        
+        <div class="slogan">
+            <img class="slogan_1" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/lx3.png">
+            <img class="slogan_2" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/lx2.png">
+            <img class="slogan_3" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/lx1.png">
+            <a href="#"><img class="slogan_4" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/lx4.png"></a>
+            
+            <a href=""><img class="slogan_5" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/lx5.png"></a>
+        </div>
+        <div class="lx_pr">
+            <img class="pr2618" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/2618.jpg"><br>
+            <span>TEL:15810002618（微信同号）</span><br>
+            <strong>有事您尽管吩咐</strong>
+        </div>
+
+
+
+        <div class="team">
+            <a href="#">公司资质证书</a><br>
+            <span>北京双骐兴瑞科技有限公司</span><br>
+            <span>北京市密云区巨各庄镇蔡家洼产业基地办公楼105室</span><br>
+            <span>京ICP备17001314号</span>
+
+
+
+
+
+
+        </div>
+        
+
+
+
+    </div>
+
+
+
+
+</body>
+
+
+</html>

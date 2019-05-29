@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+
+<!-- main JS libs -->
+<script src="../static/vanilla-cream-css/js/libs/modernizr.min.js"
+        th:src="@{/vanilla-cream-css/js/libs/modernizr.min.js}"></script>
+<script src="../static/vanilla-cream-css/js/libs/jquery-1.10.0.js"
+        th:src="@{/vanilla-cream-css/js/libs/jquery-1.10.0.js}"></script>
+<script src="../static/vanilla-cream-css/js/libs/jquery-ui.min.js"
+        th:src="@{/vanilla-cream-css/js/libs/jquery-ui.min.js}"></script>
+<script src="../static/vanilla-cream-css/js/libs/bootstrap.min.js"
+        th:src="@{/vanilla-cream-css/js/libs/bootstrap.min.js}"></script>
+
+<!-- Style CSS -->
+<link rel="stylesheet" href="../static/vanilla-cream-css/css/bootstrap.css"
+      th:href="@{/vanilla-cream-css/css/bootstrap.css}"/>
+<link rel="stylesheet" href="../static/vanilla-cream-css/style.css" th:href="@{/vanilla-cream-css/style.css}"/>
+<!-- scripts -->
+<script src="../static/vanilla-cream-css/js/general.js" th:src="@{/vanilla-cream-css/js/general.js}"></script>
+
+
+<th:block th:include="common/header :: head"></th:block>
+
+<head>
+    <meta charset="UTF-8">
+     <meta content="IE=Edge">
+    <title>爱眼猫~润目医用冷敷贴</title>
+
+    <meta name="robots" content="all">
+    <meta name="keywords" content="爱眼猫·润目医用冷敷贴，医用眼贴，冷敷贴，护眼贴">
+    <meta name="description" content="爱眼猫·润目医用冷敷贴 医用眼贴，更安全、更有效、更放心，用于眼部的冷敷理疗，适用于用眼过度引起的视疲劳、眼睛干、涩、痒、痛，视物模糊、迎风流泪的缓解和辅助治疗。">
+    <link rel="stylesheet" href="../static/vanilla-cream-css/css/aym.css" th:href="@{/vanilla-cream-css/css/aym.css}"/>
+</head>
+
+<body>
+
+    <div class="head_wrapper">
+
+        <div class="index_logo">
+                <a href="#" class="head_logo">
+                     <a href="#" class="head_logo">
+                    <img height="43px" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/aym-logo.png"></a>
+                <a href="#" class="head_title">
+                <span>润目医用冷敷贴</span>
+                </a>
+        </div>
+
+        <div class="head_bar"> 
+            <a href="index.html">监测系统</a>
+            <a href="aykt.html">爱眼课堂</a>
+            <a href="aym.html">爱眼猫</a>
+            <a href="#lxwm">联系我们</a>
+        </div>
+
+    </div>
+
+
+    <!-- 爱眼猫 -->
+    <div id="aym">
+
+    
+        <div class="aym_pc">
+            <img class="p201" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/201.png">
+            <img class="p_aym1" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/aym1.png">
+            <img class="p_aym2" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/aym2.png">
+            <img class="p_aym3" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/aym3.png">
+            <img class="p_aym4" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/aym4.png">
+            <img class="p_aym5" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/aym5.png">
+            <img class="p_aym6" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/aym6.png">
+    
+        </div>
+        <div class="aym_product">
+
+             <img class="pr209" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/209.png">
+
+            <div class="mask1">
+                <img class="pr202" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/202.jpg">
+                <img class="pr204" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/204.png">
+                <p>建议：白天用视疲劳型、晚上用眼袋型</p>
+                <strong>日用贴·提神明目、预防近视、缓解视疲劳</strong>
+                <span>统一零售价：￥<strong>36</strong>元/盒</span>
+
+            </div>
+            <div class="mask2">
+                <img class="pr203" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/203.jpg">
+                <img class="pr206" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/206.png">
+                <p>建议：白天用视疲劳型、晚上用眼袋型</p>
+                <strong>夜用贴·润目补水、消除眼袋、缓解眼睛干、涩、痒、痛</strong>
+                <span>统一零售价：￥<strong>36</strong>元/盒</span>
+            </div>
+
+             <div class="mask3">
+                <img class="pr201" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/201.jpg">
+                <img class="pr207" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/207.png">
+               
+                <p>建议：白天用视疲劳型、晚上用眼袋型</p>
+                <span>统一零售价：￥<strong>68</strong>元/盒</span>
+                <a class="jingdong" href="#">京东</a>
+                <a class="taobao" href="#">淘宝</a>
+                <a class="suning" href="#">苏宁</a>
+                <a class="pinduoduo" href="#">拼多多</a>
+            </div>
+
+            <div class="aym_outside">
+                <span><strong>产品咨询、产品详情、报价</strong></span>
+                <a href="#">了解更多</a>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+    <!-- 联系我们 -->
+    <div id="lxwm">
+
+
+
+        
+        <div class="slogan">
+            <img class="slogan_1" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/lx3.png">
+            <img class="slogan_2" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/lx2.png">
+            <img class="slogan_3" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/lx1.png">
+            <a href="#"><img class="slogan_4" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/lx4.png"></a>
+            
+            <a href=""><img class="slogan_5" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/lx5.png"></a>
+        </div>
+        <div class="lx_pr">
+            <img class="pr2618" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/2618.jpg"><br>
+            <span>TEL:15810002618（微信同号）</span><br>
+            <strong>有事您尽管吩咐</strong>
+        </div>
+
+
+
+        <div class="team">
+            <a href="#">公司资质证书</a><br>
+            <span>北京双骐兴瑞科技有限公司</span><br>
+            <span>北京市密云区巨各庄镇蔡家洼产业基地办公楼105室</span><br>
+            <span>京ICP备17001314号</span>
+
+
+
+
+
+
+        </div>
+        
+
+
+
+    </div>
+
+
+
+
+</body>
+
+
+</html>

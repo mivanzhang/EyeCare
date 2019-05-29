@@ -1,5 +1,9 @@
 package com.aiyan.product.common;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+
 public class Constants {
 
     public static final int STATUS_STEP1 = 1;
@@ -21,5 +25,9 @@ public class Constants {
     public static final String QUERYTIME = "querytimes";
     public static final String TIME = "time";
     public static final int MAX_QUERY_TIME = 20;
+
+    public static void main(String[] args) {
+
+    }
 
 }

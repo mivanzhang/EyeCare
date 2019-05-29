@@ -25,9 +25,318 @@
 <th:block th:include="common/header :: head"></th:block>
 <head>
     <meta charset="UTF-8">
-    <title>爱眼课堂</title>
+     <meta content="IE=Edge">
+    <title>爱眼课堂~欢迎您！</title>
+    <meta name="robots" content="all">
+    <meta name="keywords" content="爱眼课堂，爱眼课堂·青少年近视预防监测系统，爱眼课堂·学生护眼知识教育开拓者">
+    <meta name="description" content="爱眼课堂是一家专门为3-18岁青少年提供近视预防解决方案的团队，是最早进行学生护眼知识教育防控近视的开拓者，依托互联网、人工智能以及大数据分析，结合临床医师实际经验，努力开拓青少年近视防控领域新天地，目前以为部分学校提供教学以及学生视力监控服务，我们正努力为更多的孩子提供呵护……">
+    <link rel="stylesheet" href="../static/vanilla-cream-css/css/index.css" th:href="@{/vanilla-cream-css/css/index.css}"/>
 </head>
-<h1 style="text-align:center">爱眼课堂</h1>
+
+<body>
+
+    <div class="head_wrapper">
+
+        <div class="index_logo">
+            <a href="#" class="head_logo">
+                <img height="46px" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/aykt-logo.png">
+            </a>
+            <a href="#" class="head_title">
+                <span>青少年近视预防监测系统</span>
+            </a>
+        </div>
+
+        <div class="head_bar"> 
+            <a th:href="@{/}">监测系统</a>
+            <a th:href="@{/aykt}">爱眼课堂</a>
+            <a th:href="@{/aym}">爱眼猫</a>
+            <a href="#lxwm">联系我们</a>
+        </div>
+
+    </div>
+
+
+
+    <!-- 监测系统 -->
+    <div id="jcxt">
+
+    
+       
+        <div class="jcxt_banner">
+
+            <div class="wx_ewm">
+                <img height="120px" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/wx-ewm.jpg" title="点击扫描大图">
+            </div>
+
+            <div class="wx_cx">微信公众号查询</div>
+
+            <div class="form_login">
+
+                <p>学生视力查询：</p>
+                <form th:action="@{/query}" method="post">
+                    <P>姓名：<input id="name" name="name" type="" placeholder="请输入姓名全称(必填)" aria-describedby="basic-addon2"required/></P>
+                    <P>生日：<input id="birethday" name="birethday" type="" placeholder="例如20080129(三选一)" aria-describedby="basic-addon3"/></P>
+                    <P>学号：<input id="studentNo" name="studentNo" type="" placeholder="请正确输入学号(三选一)" aria-describedby="basic-addon2"/></P>
+                    <P>学校：<input id="school_name" name="schoolName" type="" placeholder="请输入学校全称(三选一)" aria-describedby="basic-addon1"/></P>
+                    <P><input type="submit" value="开始查询"></P>
+                </form>
+                    <span><strong>注：正确输入【姓名】+【其他三项中任意一项】即可查询。</strong></span><br>
+                    <span><strong>我们正努力为更多的孩子提供呵护、暂未开通的学校无法查询。</strong></span>
+            </div>
+
+            <div class="reg_school">
+                <a th:href="@{/school_register}">学校管理入口</a><br/>
+                <a th:href="@{/user_login}">登录</a>/
+                <a th:href="@{/school_register}">注册</a>
+            </div>
+
+            <div class="reg_hospital">
+                <a th:href="@{/hospital_register}">医疗机构验光师</a>
+                <br/>
+                <a th:href="@{/user_login}">登录</a>/
+                <a th:href="@{/hospital_register}">注册</a>
+            </div>
+
+            <div class="b_font">
+                <img  height="260px" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/weilai.png">
+            </div>
+            <div class="b_font2">
+                <img  height="200px" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/free_xiaoxiong.png">
+            </div>
+        </div>
+
+
+<div class="outside_html">
+        <div class="index_notice">
+            <span style="color:red;">系统公告：</span>
+            <span>为了积极响应党中央、国务院关于做好全国青少年近视预防的利民政策，《爱眼课堂》现已面向全国各个大、中、小学校开放青少年近视防控监测系统!</span>
+        </div>
+
+
+       <!--  帮助窗口 -->
+        <div class="index_convention">
+            <div class="con_one">
+                <p>welcome</p>
+                <span>家长、学生答疑窗口</span>
+                 <a href="#">Help</a>
+            </div>
+            <div class="con_two">
+                <p>welcome</p>
+                <span>学校、老师帮助窗口</span>
+                 <a href="#">Help</a>
+            </div>
+            <div class="con_three">
+                <p>welcome</p>
+                <span>机构、医师支持中心</span>
+                 <a href="#">Help</a>
+            </div>
+            <div class="con_four">
+                <p>welcome</p>
+                <span>政府、公众监督建议</span>
+                 <a href="#">Help</a>
+            </div>
+        </div>
+
+        
+            <div class="aykt_html">
+                <a href="aykt.html">
+                    <img height="46px" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/aykt-logo.png"><br>
+                    <span>用心呵护……</span>
+                    <div>
+                        <img src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/11.jpg">
+                    </div>
+
+                </a>
+            </div>
+            <div class="aym_html">
+                <a href="aym.html">
+                    <img height="46px" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/aym-logo.png"><br>
+                    <span>让爱传递……</span>
+                    <div>
+                        <img src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/201.jpg">
+                       
+                    </div>
+
+                </a>
+            </div>
+
+
+
+
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+ 
+
+    <!-- 联系我们 -->
+    <div id="lxwm">
+
+
+
+        
+        <div class="slogan">
+            <img class="slogan_1" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/lx3.png">
+            <img class="slogan_2" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/lx2.png">
+            <img class="slogan_3" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/lx1.png">
+            <a href="#"><img class="slogan_4" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/lx4.png"></a>
+            
+            <a href=""><img class="slogan_5" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/lx5.png"></a>
+        </div>
+        <div class="lx_pr">
+            <img class="pr2618" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/2618.jpg"><br>
+            <span>TEL:15810002618（微信同号）</span><br>
+            <strong>有事您尽管吩咐</strong>
+        </div>
+
+
+
+        <div class="team">
+            <a href="#">公司资质证书</a><br>
+            <span>北京双骐兴瑞科技有限公司</span><br>
+            <span>北京市密云区巨各庄镇蔡家洼产业基地办公楼105室</span><br>
+            <span>京ICP备17001314号</span>
+
+
+
+
+
+
+        </div>
+        
+
+
+
+    </div>
+
+
+
+</body>
+
+   <!-- 爱眼课堂 -->
+<!--     <div id="aykt">
+ -->
+
+        <!-- 占位标签 -->
+   <!--      <div class="zw">
+
+            <div class="index_logo">
+                <a href="#" class="head_logo">
+                    <img height="46px" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/aykt-logo.png"></a>
+                <a href="#" class="head_title">
+                <span>学生护眼知识教育平台</span>
+                </a>
+            </div>
+            <div class="aykt_outside">
+                <a href="#">课程咨询、预约试听、了解更多...</a>
+            </div>
+
+        </div> -->
+
+       <!--  横幅 -->
+<!--         <div class="banner">
+            <img class="b_png5" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/5.png">
+            <img class="b_png6" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/6.png">
+            <img class="b_png8" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/8.png">
+        </div>
+
+        <img class="wz1" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/wz1.png">
+
+        <div class="index_picture">
+
+            <div class="picture1"><img src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/10.jpg"></div>
+            <div class="picture2"><img src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/11.jpg"></div>
+            <div class="picture3"><img src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/12.jpg"></div>
+            <div class="picture4"><img src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/13.jpg"></div>
+          
+        </div>
+
+
+    </div>
+ -->
+
+
+
+
+    <!-- 爱眼猫 -->
+<!--     <div id="aym">
+ -->
+        <!-- 占位标签 -->
+<!--         <div class="zw">
+            <div class="index_logo">
+                <a href="#" class="head_logo">
+                    <img height="46px" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/aym-logo.png"></a>
+                <a href="#" class="head_title">
+                <span>润目医用冷敷贴</span>
+                </a>
+            </div>
+            <div class="aykt_outside">
+                <span><strong>产品咨询  TEL：15810002618</strong></span>
+                <a href="#">了解更多</a>
+            </div>
+        </div>
+
+
+
+        <div class="aym_pc">
+            <img class="p201" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/201.png">
+            <img class="p_aym1" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/aym1.png">
+            <img class="p_aym2" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/aym2.png">
+            <img class="p_aym3" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/aym3.png">
+            <img class="p_aym4" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/aym4.png">
+            <img class="p_aym5" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/aym5.png">
+            <img class="p_aym6" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/aym6.png">
+    
+        </div>
+        <div class="aym_product">
+            <div class="mask1">
+                <img class="pr202" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/202.jpg">
+                <img class="pr204" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/204.png">
+                <p>白天用视疲劳型、晚上用眼袋型</p>
+                <span>统一零售价：￥<strong>36</strong>元/盒</span>
+
+            </div>
+            <div class="mask2">
+                <img class="pr203" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/203.jpg">
+                <img class="pr206" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/206.png">
+                <p>白天用视疲劳型、晚上用眼袋型</p>
+                <span>统一零售价：￥<strong>36</strong>元/盒</span>
+            </div>
+
+             <div class="mask3">
+                <img class="pr201" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/201.jpg">
+                <img class="pr207" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/207.png">
+                <img class="pr209" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/209.png">
+                <p>白天用视疲劳型、晚上用眼袋型</p>
+                <span>统一零售价：￥<strong>68</strong>元/盒</span>
+                <a class="jingdong" href="#">京东</a>
+                <a class="taobao" href="#">淘宝</a>
+                <a class="suning" href="#">苏宁</a>
+                <a class="pinduoduo" href="#">拼多多</a>
+            </div>
+        </div>
+    </div>
+
+ -->
+
+
+
+
+
+
+
+
+<!-- <h1 style="text-align:center">爱眼课堂</h1>
 <div style="text-align: right;margin-right: 100">
 <a th:href="@{/logout}" style="text-align: right;  text-decoration: underline;" th:text="${name}"></a>
 </div>
@@ -103,5 +412,5 @@
         </div>
     </div>
 </form>
-</body>
+</body> -->
 </html>
