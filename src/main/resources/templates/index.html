@@ -92,7 +92,7 @@
 
                 <p>学生视力查询：</p>
                     
-                <form action="@{/query}" method="post">
+                <form th:action="@{/query}" method="post">
                     <P>姓名：<input id="name" name="name" type="" placeholder="请输入姓名全称(必填)" aria-describedby="basic-addon2"required/></P>
                     <P>生日：<input id="birethday" name="birethday" type="" placeholder="例如20080129(三选一)" aria-describedby="basic-addon3"/></P>
                     <P>学号：<input id="studentNo" name="studentNo" type="" placeholder="请正确输入学号(三选一)" aria-describedby="basic-addon2"/></P>
@@ -104,16 +104,16 @@
             </div>
 
             <div class="reg_school">
-                <a href="@{/school_register}">学校管理入口</a><br/>
-                <a href="@{/school_register}">登录</a>/
-                <a href="#">注册</a>
+                <a th:href="@{/school_register}">学校管理入口</a><br/>
+                <a th:href="@{/school_register}">登录</a>/
+                <a th:href="@{/school_register}">注册</a>
             </div>
 
             <div class="reg_hospital">
-                <a href="@{/hospital_register}">医疗机构验光师</a>
+                <a th:href="@{/hospital_register}">医疗机构验光师</a>
                 <br/>
-                <a href="@{/hospital_register}">登录</a>/
-                <a href="#">注册</a>
+                <a th:href="@{/hospital_register}">登录</a>/
+                <a th:href="@{/hospital_register}">注册</a>
             </div>
 
             <div class="b_font">
