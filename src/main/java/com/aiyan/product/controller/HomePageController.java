@@ -49,6 +49,18 @@ public class HomePageController {
         return "index";
     }
 
+    @RequestMapping("/aykt")
+    public String aykt() {
+        // 加入一个属性，用来在模板中读取
+        return "aykt";
+    }
+
+    @RequestMapping("/aym")
+    public String aym() {
+        return "aym";
+    }
+
+
     private Optional<User> loginValid(HttpSession session) {
         String userToken = (String) session.getAttribute("token");
         Optional<User> userOptional = userRepository.findUserByToken(userToken);

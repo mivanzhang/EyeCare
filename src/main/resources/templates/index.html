@@ -25,9 +25,265 @@
 <th:block th:include="common/header :: head"></th:block>
 <head>
     <meta charset="UTF-8">
-    <title>爱眼课堂</title>
+     <meta content="IE=Edge">
+    <title>爱眼课堂~欢迎您！</title>
+    <meta name="robots" content="all">
+    <meta name="keywords" content="爱眼课堂，爱眼课堂·青少年近视预防监测系统，爱眼课堂·学生护眼知识教育开拓者">
+    <meta name="description" content="爱眼课堂是一家专门为3-18岁青少年提供近视预防、视力监测、预警提示等团体眼健康解决方案的团队，是最早进行学生护眼知识教育防控近视的开拓者，依托互联网、人工智能以及大数据分析，结合临床医师实际经验，努力开拓青少年近视防控领域新天地，目前以为部分学校提供教学以及学生视力监控服务，我们正努力为更多的孩子提供呵护……">
+    <link rel="stylesheet" href="../static/vanilla-cream-css/css/index.css" th:href="@{/vanilla-cream-css/css/index.css}"/>
 </head>
-<h1 style="text-align:center">爱眼课堂</h1>
+
+<body>
+
+    <div class="head_wrapper">
+
+        <div class="index_logo">
+            <a href="#" class="head_logo">
+                <img height="46px" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/aykt-logo.png">
+            </a>
+            <a href="#" class="head_title">
+                <span>青少年视力监测、预警提示系统</span>
+            </a>
+        </div>
+
+        <div class="head_bar"> 
+            <a th:href="@{/}" >监测系统</a>
+            <a  th:href="@{aykt}">爱眼课堂</a>
+            <a  th:href="@{aym}" >爱眼猫</a>
+            <a href="#lxwm" th:href="@{#lxwm}">联系我们</a>
+        </div>
+
+    </div>
+
+
+
+    <!-- 监测系统 -->
+    <div id="jcxt">
+
+    
+       
+        <div class="jcxt_banner">
+
+            <div class="wx_ewm">
+
+                <a href = "javascript:void(0)" onclick = "document.getElementById('light2').style.display='block'">
+                <img height="120px" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/wx-ewm.jpg" title="点击扫描大图">
+                </a>
+            </div>
+
+
+            <div class="wx_cx">
+
+            <a href = "javascript:void(0)" onclick = "document.getElementById('light2').style.display='block'">微信公众号查询</a>
+
+            </div>
+
+            <div id="light2" class="white_content">
+
+                <img class="ewm" height="322px" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/wx-ewm.jpg">
+               
+
+                <a href = "javascript:void(0)" onclick = "document.getElementById('light2').style.display='none'">关闭</a>
+            </div> 
+          
+            
+
+            <div class="form_login">
+
+                <p>学生视力查询：</p>
+                    
+                <form action="@{/query}" method="post">
+                    <P>姓名：<input id="name" name="name" type="" placeholder="请输入姓名全称(必填)" aria-describedby="basic-addon2"required/></P>
+                    <P>生日：<input id="birethday" name="birethday" type="" placeholder="例如20080129(三选一)" aria-describedby="basic-addon3"/></P>
+                    <P>学号：<input id="studentNo" name="studentNo" type="" placeholder="请正确输入学号(三选一)" aria-describedby="basic-addon2"/></P>
+                    <P>学校：<input id="school_name" name="schoolName" type="" placeholder="请输入学校全称(三选一)" aria-describedby="basic-addon1"/></P>
+                    <P><input type="submit" value="开始查询"></P>
+                </form>
+                    <span><strong>注：正确输入【姓名】+【其他三项中任意一项】即可查询。</strong></span><br>
+                    <span><strong>我们正努力为更多的孩子提供呵护、暂未开通的学校无法查询。</strong></span>
+            </div>
+
+            <div class="reg_school">
+                <a href="@{/school_register}">学校管理入口</a><br/>
+                <a href="@{/school_register}">登录</a>/
+                <a href="#">注册</a>
+            </div>
+
+            <div class="reg_hospital">
+                <a href="@{/hospital_register}">医疗机构验光师</a>
+                <br/>
+                <a href="@{/hospital_register}">登录</a>/
+                <a href="#">注册</a>
+            </div>
+
+            <div class="b_font">
+                <img  height="260px" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/weilai.png">
+            </div>
+            <div class="b_font2">
+                <img  height="200px" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/free_xiaoxiong.png">
+            </div>
+        </div>
+
+
+<div class="outside_html">
+        <div class="index_notice">
+            <span style="color:red;">系统公告：</span>
+            <span>为了积极响应党中央、国务院关于做好全国青少年近视预防的利民政策，《爱眼课堂》现已面向全国各个大、中、小学校开放青少年近视防控监测系统!</span>
+        </div>
+
+
+       <!--  帮助窗口 -->
+        <div class="index_convention">
+            <div class="con_one">
+                <p>welcome</p>
+                <span>家长、学生答疑窗口</span>
+
+
+
+                <div class="help" href = "javascript:void(0)" onclick = "document.getElementById('light1').style.display='block'">Help</div>
+
+                <div id="light1" class="white_content">
+                    <p>智能系统正在快马扬鞭的赶来……</p>
+                    <p>由小主在这先候着您</p>
+                    <p>TEL:15810002618</p>
+            
+                    <img class="ewm2618" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/2618.jpg">
+
+                    <a href = "javascript:void(0)" onclick = "document.getElementById('light1').style.display='none'">关闭</a>
+                </div> 
+
+
+            </div>
+            <div class="con_two">
+                <p>welcome</p>
+                <span>学校、老师帮助窗口</span>
+                 <div class="help" href = "javascript:void(0)" onclick = "document.getElementById('light1').style.display='block'">Help</div>
+
+            </div>
+            <div class="con_three">
+                <p>welcome</p>
+                <span>机构、医师支持中心</span>
+                 <div class="help" href = "javascript:void(0)" onclick = "document.getElementById('light1').style.display='block'">Help</div>
+
+            </div>
+            <div class="con_four">
+                <p>welcome</p>
+                <span>政府、公众监督建议</span>
+                 <div class="help" href = "javascript:void(0)" onclick = "document.getElementById('light1').style.display='block'">Help</div>
+
+            </div>
+        </div>     
+            <div class="aykt_html">
+                <a href="aykt.html">
+                    <img height="46px" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/aykt-logo.png"><br>
+                    <span>用心呵护……</span>
+                    <div>
+                        <img src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/11.jpg">
+                    </div>
+                </a>
+            </div>
+            <div class="aym_html">
+                <a href="aym.html">
+                    <img height="46px" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/aym-logo.png"><br>
+                    <span>让爱传递……</span>
+                    <div>
+                        <img src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/201.jpg">                   
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+ 
+
+    <!-- 联系我们 -->
+    <div id="lxwm">
+        
+        <div class="slogan">
+            <img class="slogan_1" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/lx1.png">
+            <img class="slogan_2" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/lx2.png">
+            <img class="slogan_3" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/lx3.png">
+
+                <a href = "javascript:void(0)" onclick = "document.getElementById('light3').style.display='block'">
+                    <img class="slogan_4" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/lx4.png">
+                </a>
+
+                <div id="light3" class="white_content">
+                  
+                    <img class="business_logo1" height="46px" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/aykt-logo.png">
+                    <span class="business_after1" >用心呵护……</span>
+
+                    <div class="business_1" >
+                        <p>近视防控知识教学</p>
+                        <p>建立青少年视力健康电子档案</p>
+                        <p>专业上门验光检查服务</p>
+                        <p>视力监测、预警提示</p>
+                        <p>社会团体眼健康服务</p>
+                    </div>
+
+                   <img class="business_logo2" height="46px" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/aym-logo.png">
+                   <span class="business_after2" >让爱传递……</span>
+
+                    <div class="business_2" >
+                        <p>润目医用冷敷贴</p>
+                        <p>专业视功能训练器械</p>
+                        <p>学生护眼用品</p>
+                        <p>教学演示磨具</p>
+                    
+                    </div>
+
+                    <a href = "javascript:void(0)" onclick = "document.getElementById('light3').style.display='none'">关闭</a>
+                </div>
+
+                <a href = "javascript:void(0)" onclick = "document.getElementById('light4').style.display='block'"><img class="slogan_5" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/lx5.png"></a>
+
+                <div id="light4" class="white_content">
+           
+                我们非常愿意倾听您的宝贵意见：
+
+                <img class="ewm2618" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/2618.jpg">
+
+                <a href = "javascript:void(0)" onclick = "document.getElementById('light4').style.display='none'">关闭</a>
+            </div> 
+        </div>
+        <div class="lx_pr">
+            <img class="pr2618" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index/2618.jpg"><br>
+            <span>TEL:15810002618（微信同号）</span><br>
+            <strong>有事您尽管吩咐</strong>
+        </div>
+        <div class="team">
+
+            <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block'">公司资质证书</a><br>
+
+            <div id="light" class="white_content">
+                <img class="company_1" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index.img/com_1.jpg">
+                <img class="company_2" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index.img/com_2.jpg">
+                <img class="company_3" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index.img/com_3.jpg">
+                <img class="company_4" src="https://raw.githubusercontent.com/mivanzhang/EyeCare/develop/src/main/resources/static/images/index.img/com_4.jpg">
+
+                <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none'">关闭</a>
+            </div> 
+           
+            <span>北京双骐兴瑞科技有限公司</span><br>
+            <span>北京市密云区巨各庄镇蔡家洼产业基地办公楼105室</span><br>
+            <span>京ICP备17001314号</span>
+
+
+        </div>
+    </div>
+</body>
+
+  
+
+
+
+
+
+
+
+
+
+
+<!-- <h1 style="text-align:center">爱眼课堂</h1>
 <div style="text-align: right;margin-right: 100">
 <a th:href="@{/logout}" style="text-align: right;  text-decoration: underline;" th:text="${name}"></a>
 </div>
@@ -103,5 +359,5 @@
         </div>
     </div>
 </form>
-</body>
+</body> -->
 </html>
